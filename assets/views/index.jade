@@ -1,17 +1,13 @@
-doctype html
-html
-    head
-        style
-            include ../bower_components/bootstrap/dist/css/bootstrap.css
-            include ../bower_components/bootstrap/dist/css/bootstrap-theme.css
-        script
-            include ../bower_components/bootstrap/dist/js/bootstrap.js
+include includes/base
+div.container
 
-    body
-        h1 Boiler Plate
+    include includes/header.html
 
-        p This is some basic boiler plate for:
-        ul
-            li A Node.js server
-            li Jade templating
-            li Bootstrap styling
+    include includes/navbar.html
+
+
+    p This is some basic boiler plate for:
+    ul
+        li A Node.js server
+        li Jade templating
+        li Bootstrap styling
