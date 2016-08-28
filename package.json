@@ -1,0 +1,16 @@
+{
+  "name": "dojo_front_end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "bower": "^1.7.9",
+    "express": "^4.14.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Tom Benyon (tom.benyon@gmail.com)",
+  "license": "ISC"
+}
