@@ -1,0 +1,23 @@
+include includes/base
+    div(class="container")
+        div(class="row")
+            div(class="col-md-3")
+                h3 How to contact us:
+                p
+                    != 'E-mail: tom.benyon@gmail.com <br>'
+
+            div(class="col-md-3")
+                h3 How to find us:
+                p
+                    != 'The Learning Resource Centre <br>'
+                    != 'Tanbridge House School <br>'
+                    != 'Farthings Hill <br>'
+                    != 'Guildford Road <br>'
+                    != 'Horsham <br>'
+                    != 'RH12 1SR <br>'
+            div(class="col-md-6")
+                include includes/dojo_map.html
+                p
+                    != '<br><br>'
+    div
+        img(class="img-responsive" src="../assets/images/THS_map.png")

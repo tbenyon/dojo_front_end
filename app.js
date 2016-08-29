@@ -10,6 +10,14 @@ app.get('/', function(req, res){
         res.render('index.jade');
 });
 
+app.get('/contact-us', function(req, res){
+    res.render('contact_us.jade');
+});
+
+app.get('/faq', function(req, res){
+    res.render('FAQ.jade');
+});
+
 var port = process.env.PORT || 3000;
 
 var server = app.listen(port, function () {
