@@ -1,12 +1,11 @@
 include includes/base
     div(class="container")
         div(class="row")
-            div(class="col-md-3")
+            div(class="col-md-6" align="center")
                 h3 How to contact us:
                 p
-                    != 'E-mail: tom.benyon@gmail.com <br>'
+                    != 'E-mail: tom.benyon@gmail.com <br><br>'
 
-            div(class="col-md-3")
                 h3 How to find us:
                 p
                     != 'The Learning Resource Centre <br>'
@@ -14,10 +13,14 @@ include includes/base
                     != 'Farthings Hill <br>'
                     != 'Guildford Road <br>'
                     != 'Horsham <br>'
-                    != 'RH12 1SR <br>'
+                    != 'RH12 1SR <br><br>'
             div(class="col-md-6")
-                include includes/dojo_map.html
+                h3(align="center") Horsham Map:
+                style
+                    include includes/map/map.css
+                include includes/map/dojo_map.html
                 p
                     != '<br><br>'
     div
+        h3(align="center") School Map:
         img(class="img-responsive" src="../assets/images/THS_map.png")
