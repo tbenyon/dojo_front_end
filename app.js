@@ -7,7 +7,7 @@ app.set('views', __dirname+'/assets/views');
 app.use('/assets', express.static(__dirname + '/assets'));
 
 app.get('/', function(req, res){
-        res.render('index.jade');
+    res.render('index.jade');
 });
 
 app.get('/contact-us', function(req, res){
