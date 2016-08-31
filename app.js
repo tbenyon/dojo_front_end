@@ -18,6 +18,10 @@ app.get('/faq', function(req, res){
     res.render('FAQ.jade');
 });
 
+app.get('/resources', function(req, res){
+    res.render('resources.jade');
+});
+
 var port = process.env.PORT || 3000;
 
 var server = app.listen(port, function () {
