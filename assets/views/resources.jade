@@ -1,2 +1,6 @@
 include includes/base.jade
+    h3 Select files or folders below:
     include includes/google_drive_embed.html
+
+    form(action="https://drive.google.com/folderview?id=0ByHqUIiDn3oIcjJveGdjeVJBOGc&usp=sharing")
+        input(class="btn btn-primary" type="submit" value="Go to Google Drive")
