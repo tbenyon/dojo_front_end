@@ -41,7 +41,6 @@ function executeQuery(queryString) {
     return new Promise(function (resolve, reject) {
         pool.getConnection(function(err,connection){
             if (err) {
-                connection.release();
                 console.error('Error in connection database');
                 reject(err);
             }
