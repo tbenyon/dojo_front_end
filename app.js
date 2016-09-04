@@ -1,6 +1,9 @@
 var express = require('express');
 var app = express();
 const dojo_db = require('./server/register/mySQL.js');
+const favicon = require('serve-favicon');
+
+app.use(favicon(__dirname + '/assets/images/favicon.ico'));
 
 app.set('view engine', 'pug');
 app.set('views', __dirname+'/assets/views');
