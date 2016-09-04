@@ -1,5 +1,21 @@
+mixin createUserTable(typeOfUser)
+
+    div(class="col-md-6")
+        h2(align="center")= typeOfUser
+        table(class="table table-striped")
+            tr
+                th User Name
+                th Type
+                th Dojo Since
+
+            each record in users
+                if record.UserType === typeOfUser
+                    tr
+                        td !{record.NickName}
+                        td !{record.UserType}
+                        td !{new Date(record.CreatedDate).toUTCString().split(' ').slice(0, 4).join(' ')}
+
+
 include includes/base.jade
-    h2 Here is a list of all the current attendees:
-    ul
-        each userName in usernames
-            li= userName
+    +createUserTable("Student")
+    +createUserTable("Mentor")

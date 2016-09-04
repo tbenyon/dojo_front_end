@@ -25,6 +25,18 @@ exports.getUsernames = function () {
     });
 };
 
+exports.getUsers = function () {
+    return new Promise(function(resolve, reject) {
+        const queryString = 'SELECT `NickName`, `UserType`, `CreatedDate` FROM `User` ORDER BY UserType Asc, CreatedDate Asc;';
+        executeQuery(queryString).then(function (data) {
+            resolve(data);
+        }).catch(function (err) {
+            console.error('Failed to get users.' + err);
+            reject(err);
+        });
+    });
+};
+
 function executeQuery(queryString) {
     return new Promise(function (resolve, reject) {
         pool.getConnection(function(err,connection){

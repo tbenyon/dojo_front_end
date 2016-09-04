@@ -24,8 +24,8 @@ app.get('/resources', function(req, res){
 });
 
 app.get('/us', function(req, res){
-    dojo_db.getUsernames().then(function (data) {
-        res.render('us.jade', {'usernames': data});
+    dojo_db.getUsers().then(function (data) {
+        res.render('us.jade', {'users': data});
     });
 });
 
