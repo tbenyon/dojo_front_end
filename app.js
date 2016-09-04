@@ -23,9 +23,13 @@ app.get('/resources', function(req, res){
     res.render('resources.jade');
 });
 
-dojo_db.getUsernames().then(function (data) {
-    console.log(data);
+app.get('/us', function(req, res){
+    dojo_db.getUsernames().then(function (data) {
+        res.render('us.jade', {'usernames': data});
+    });
 });
+
+
 
 var port = process.env.PORT || 3000;
 
