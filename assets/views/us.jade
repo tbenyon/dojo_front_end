@@ -5,17 +5,18 @@ mixin createUserTable(typeOfUser)
         table(class="table table-striped")
             tr
                 th User Name
-                th Type
-                th Dojo Since
+                th Member Since
+                th Birthday
 
             each record in users
                 if record.UserType === typeOfUser
                     tr
                         td !{record.NickName}
-                        td !{record.UserType}
                         td !{new Date(record.CreatedDate).toUTCString().split(' ').slice(0, 4).join(' ')}
+                        td #{new Date(record.DOB).getDate()} #{monthNames[new Date(record.DOB).getMonth()]}
 
 
 include includes/base.jade
+    - var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     +createUserTable("Student")
     +createUserTable("Mentor")

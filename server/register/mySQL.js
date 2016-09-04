@@ -27,7 +27,7 @@ exports.getUsernames = function () {
 
 exports.getUsers = function () {
     return new Promise(function(resolve, reject) {
-        const queryString = 'SELECT `NickName`, `UserType`, `CreatedDate` FROM `User` ORDER BY UserType Asc, CreatedDate Asc;';
+        const queryString = 'SELECT `NickName`, `UserType`, `CreatedDate`, `DOB` FROM `User` ORDER BY UserType Asc, CreatedDate Asc;';
         executeQuery(queryString).then(function (data) {
             resolve(data);
         }).catch(function (err) {
