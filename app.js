@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+const dojo_db = require('./server/register/mySQL.js');
 
 app.set('view engine', 'pug');
 app.set('views', __dirname+'/assets/views');
@@ -20,6 +21,10 @@ app.get('/faq', function(req, res){
 
 app.get('/resources', function(req, res){
     res.render('resources.jade');
+});
+
+dojo_db.getUsernames().then(function (data) {
+    console.log(data);
 });
 
 var port = process.env.PORT || 3000;
