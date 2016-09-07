@@ -9,7 +9,7 @@ exports.listCalendarEvents = function() {
                 auth: auth,
                 calendarId: 'primary',
                 timeMin: (new Date()).toISOString(),
-                maxResults: 10,
+                maxResults: 6,
                 singleEvents: true,
                 orderBy: 'startTime'
             }, function (err, response) {
