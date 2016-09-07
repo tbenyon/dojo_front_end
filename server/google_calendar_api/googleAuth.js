@@ -1,6 +1,5 @@
 var fs = require('fs');
 var readline = require('readline');
-var google = require('googleapis');
 var googleAuth = require('google-auth-library');
 
 // If modifying these scopes, delete your previously saved credentials
@@ -10,15 +9,6 @@ var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
     process.env.USERPROFILE) + '/.credentials/';
 var TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs-quickstart.json';
 
-// Load client secrets from a local file.
-const google_credentials = {
-    client_id: process.env.dojo_google_client_id,
-    client_secret: process.env.dojo_google_client_secret,
-    redirect_uris: process.env.dojo_google_redirect_uris
-};
-authorize(google_credentials, listEvents);
-
-listEvents();
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
  * given callback function.
@@ -26,10 +16,10 @@ listEvents();
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
-function authorize(credentials, callback) {
-    var clientSecret = credentials.client_secret;
-    var clientId = credentials.client_id;
-    var redirectUrl = credentials.redirect_uris[0];
+exports.authorise_then_execute = function(callback) {
+    var clientSecret = process.env.dojo_google_client_secret;
+    var clientId = process.env.dojo_google_client_id;
+    var redirectUrl = process.env.dojo_google_redirect_uris[0];
     var auth = new googleAuth();
     var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
 
@@ -91,37 +81,4 @@ function storeToken(token) {
     }
     fs.writeFile(TOKEN_PATH, JSON.stringify(token));
     console.log('Token stored to ' + TOKEN_PATH);
-}
-
-/**
- * Lists the next 10 events on the user's primary calendar.
- *
- * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
- */
-function listEvents(auth) {
-    var calendar = google.calendar('v3');
-    calendar.events.list({
-        auth: auth,
-        calendarId: 'primary',
-        timeMin: (new Date()).toISOString(),
-        maxResults: 10,
-        singleEvents: true,
-        orderBy: 'startTime'
-    }, function(err, response) {
-        if (err) {
-            console.log('The API returned an error: ' + err);
-            return;
-        }
-        var events = response.items;
-        if (events.length == 0) {
-            console.log('No upcoming events found.');
-        } else {
-            console.log('Upcoming 10 events:');
-            for (var i = 0; i < events.length; i++) {
-                var event = events[i];
-                var start = event.start.dateTime || event.start.date;
-                console.log('%s - %s', start, event.summary);
-            }
-        }
-    });
 }
