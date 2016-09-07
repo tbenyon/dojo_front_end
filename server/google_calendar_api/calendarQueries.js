@@ -1,12 +1,7 @@
 const google = require('googleapis');
 const googleAuth = require("./googleAuth.js");
 
-
-listEvents().then(function (result) {
-        console.log(result);
-});
-
-function listEvents() {
+exports.listCalendarEvents = function() {
     return new Promise(function (resolve, reject) {
         googleAuth.authorise().then(function (auth) {
             var calendar = google.calendar('v3');
@@ -30,5 +25,5 @@ function listEvents() {
                 }
             });
         });
-    })
+    });
 }
