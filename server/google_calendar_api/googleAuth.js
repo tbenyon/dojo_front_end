@@ -16,21 +16,23 @@ var TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs-quickstart.json';
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
-exports.authorise_then_execute = function(callback) {
-    var clientSecret = process.env.dojo_google_client_secret;
-    var clientId = process.env.dojo_google_client_id;
-    var redirectUrl = process.env.dojo_google_redirect_uris[0];
-    var auth = new googleAuth();
-    var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
+exports.authorise = function() {
+    return new Promise(function (resolve) {
+        var clientSecret = process.env.dojo_google_client_secret;
+        var clientId = process.env.dojo_google_client_id;
+        var redirectUrl = process.env.dojo_google_redirect_uris[0];
+        var auth = new googleAuth();
+        var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
 
-    // Check if we have previously stored a token.
-    fs.readFile(TOKEN_PATH, function(err, token) {
-        if (err) {
-            getNewToken(oauth2Client, callback);
-        } else {
-            oauth2Client.credentials = JSON.parse(token);
-            callback(oauth2Client);
-        }
+        // Check if we have previously stored a token.
+        fs.readFile(TOKEN_PATH, function (err, token) {
+            if (err) {
+                resolve(getNewToken(oauth2Client));
+            } else {
+                oauth2Client.credentials = JSON.parse(token);
+                resolve(oauth2Client);
+            }
+        });
     });
 }
 
@@ -42,27 +44,30 @@ exports.authorise_then_execute = function(callback) {
  * @param {getEventsCallback} callback The callback to call with the authorized
  *     client.
  */
-function getNewToken(oauth2Client, callback) {
-    var authUrl = oauth2Client.generateAuthUrl({
-        access_type: 'offline',
-        scope: SCOPES
-    });
-    console.log('Authorize this app by visiting this url: ', authUrl);
-    var rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-    });
-    rl.question('Enter the code from that page here: ', function(code) {
-        rl.close();
-        oauth2Client.getToken(code, function(err, token) {
-            if (err) {
-                console.log('Error while trying to retrieve access token', err);
-                return;
-            }
-            oauth2Client.credentials = token;
-            storeToken(token);
-            callback(oauth2Client);
+function getNewToken(oauth2Client) {
+    return new Promose(function (resolve, reject) {
+        var authUrl = oauth2Client.generateAuthUrl({
+            access_type: 'offline',
+            scope: SCOPES
         });
+        console.log('Authorize this app by visiting this url: ', authUrl);
+        var rl = readline.createInterface({
+            input: process.stdin,
+            output: process.stdout
+        });
+        rl.question('Enter the code from that page here: ', function(code) {
+            rl.close();
+            oauth2Client.getToken(code, function(err, token) {
+                if (err) {
+                    console.error('Error while trying to retrieve access token');
+                    reject(err);
+                }
+                oauth2Client.credentials = token;
+                storeToken(token);
+                resolve(oauth2Client);
+            });
+        });
+
     });
 }
 
