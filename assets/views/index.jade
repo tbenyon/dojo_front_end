@@ -5,7 +5,12 @@ include includes/base
             include includes/aboutDojo.jade
 
         div(class="col-md-4")
+            - var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             //include includes/calendar.html
             h1 Dojo Dates
             p Below are the Google Calendar dates
-            h3 #{dojoEvents}
+            ul
+                each event in dojoEvents
+                    - dojoDate = event.start.dateTime;
+                    li #{event.summary}
+                    li #{new Date(dojoDate).getDate()} #{monthNames[new Date(dojoDate).getMonth()]}
