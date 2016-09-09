@@ -1,0 +1,12 @@
+- var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+h1(align="center") Dojo Dates
+each event in dojoEvents
+    - dojoDate = event.start.dateTime;
+    div(class="panel panel-default" id="calendarPanel")
+        if event.summary.includes("NO")
+            div(class="panel-heading calendarPanel-heading-red") #{event.summary}
+        else
+            div(class="panel-heading") #{event.summary}
+
+        div(class="panel-body" id="calendarPanel-body") #{new Date(dojoDate).getDate()} #{monthNames[new Date(dojoDate).getMonth()]}
