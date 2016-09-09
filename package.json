@@ -6,6 +6,8 @@
   "dependencies": {
     "bower": "^1.7.9",
     "express": "^4.14.0",
+    "google-auth-library": "^0.9.8",
+    "googleapis": "^12.4.0",
     "jade": "^1.11.0",
     "mysql": "^2.11.1",
     "serve-favicon": "^2.3.0"
