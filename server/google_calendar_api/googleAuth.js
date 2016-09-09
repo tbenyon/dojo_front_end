@@ -45,7 +45,7 @@ exports.authorise = function() {
  *     client.
  */
 function getNewToken(oauth2Client) {
-    return new Promose(function (resolve, reject) {
+    return new Promise(function (resolve, reject) {
         var authUrl = oauth2Client.generateAuthUrl({
             access_type: 'offline',
             scope: SCOPES
