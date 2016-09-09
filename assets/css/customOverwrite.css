@@ -21,3 +21,11 @@
 
     font-weight: bolder;
 }
+
+#calendarPanel-body {
+    color: black;
+}
+
+.calendarPanel-heading-red {
+    color: red;
+}
