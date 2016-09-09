@@ -1,0 +1,24 @@
+- var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+h1(align="center") Dojo Dates
+each event in dojoEvents
+    -
+        var dojoDate = event.start.dateTime;
+        var rawDate = new Date(dojoDate);
+        var day = rawDate.getDate();
+        var month = monthNames[rawDate.getMonth()];
+        var hours = rawDate.getHours();
+        var minutes = rawDate.getMinutes();
+        dojoDate = event.end.dateTime;
+        rawDate = new Date(dojoDate);
+        var endHours = rawDate.getHours();
+        var endMinutes = rawDate.getMinutes();
+
+    div(class="panel panel-default" id="calendarPanel")
+        if event.summary.includes("NO")
+            div(class="panel-heading calendarPanel-heading-red") #{event.summary}
+        else
+            div(class="panel-heading") #{event.summary}
+
+        div(class="panel-body" id="calendarPanel-body") #{day} #{month} #{hours}:#{minutes} - #{endHours}:#{endMinutes}
+
