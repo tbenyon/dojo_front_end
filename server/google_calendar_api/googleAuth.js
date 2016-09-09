@@ -20,7 +20,7 @@ exports.authorise = function() {
     return new Promise(function (resolve) {
         var clientSecret = process.env.dojo_google_client_secret;
         var clientId = process.env.dojo_google_client_id;
-        var redirectUrl = process.env.dojo_google_redirect_uris[0];
+        var redirectUrl = process.env.dojo_google_redirect_uris;
         var auth = new googleAuth();
         var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
 
