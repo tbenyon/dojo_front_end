@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 const dojo_db = require('./server/register/mySQL.js');
 const favicon = require('serve-favicon');
+const calendar = require("./server/google_calendar_api/calendarQueries.js");
 
 app.use(favicon(__dirname + '/assets/images/favicon.ico'));
 
@@ -10,8 +11,13 @@ app.set('views', __dirname+'/assets/views');
 
 app.use('/assets', express.static(__dirname + '/assets'));
 
-app.get('/', function(req, res){
-    res.render('index.jade');
+app.get('/', function(req, res) {
+    calendar.listCalendarEvents().then(function (events) {
+        res.render('index.jade', {dojoEvents: events});
+    }).catch(function (err) {
+        console.error("Couldn't retrieve calendar.\n", err);
+        res.render('index.jade');
+    });
 });
 
 app.get('/contact-us', function(req, res){
@@ -31,8 +37,6 @@ app.get('/us', function(req, res){
         res.render('us.jade', {'users': data});
     });
 });
-
-
 
 var port = process.env.PORT || 3000;
 
