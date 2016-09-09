@@ -16,14 +16,15 @@ exports.listCalendarEvents = function() {
                 if (err) {
                     console.error("Failed when getting Google Calendar Events");
                     reject(err);
-                }
-                var events = response.items;
-                if (events.length == 0) {
-                    resolve([]);
                 } else {
-                    resolve(events);
+                    var events = response.items;
+                    if (events.length == 0) {
+                        resolve([]);
+                    } else {
+                        resolve(events);
+                    }
                 }
             });
         });
     });
-}
+};

@@ -14,6 +14,9 @@ app.use('/assets', express.static(__dirname + '/assets'));
 app.get('/', function(req, res) {
     calendar.listCalendarEvents().then(function (events) {
         res.render('index.jade', {dojoEvents: events});
+    }).catch(function (err) {
+        console.error("Couldn't retrieve calendar.\n", err);
+        res.render('index.jade');
     });
 });
 

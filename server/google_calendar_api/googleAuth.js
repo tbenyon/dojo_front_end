@@ -34,7 +34,7 @@ exports.authorise = function() {
             }
         });
     });
-}
+};
 
 /**
  * Get and store new token after prompting for user authorization, and then

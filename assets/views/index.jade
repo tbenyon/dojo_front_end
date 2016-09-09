@@ -1,12 +1,17 @@
 include includes/base
     div(class="row")
-        div(class="col-md-8")
-            include includes/jumbotron.jade
-            include includes/aboutDojo.jade
+        if dojoEvents
+            div(class="col-md-8")
+                include includes/jumbotron.jade
+                include includes/aboutDojo.jade
 
-        div(class="col-md-4")
-            //include includes/calendar.html
-            style
-                include ../css/customOverwrite.css
+            div(class="col-md-4")
+                    style
+                        include ../css/customOverwrite.css
+                    include includes/custom_calendar.jade
 
-            include includes/custom_calendar.jade
+        else
+            div
+                include includes/jumbotron.jade
+                include includes/aboutDojo.jade
+
