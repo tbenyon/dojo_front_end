@@ -38,6 +38,10 @@ app.get('/us', function(req, res){
     });
 });
 
+app.get('/oauth2callback', function(req, res){
+        res.send(req.query.code);
+});
+
 var port = process.env.PORT || 3000;
 
 var server = app.listen(port, function () {
