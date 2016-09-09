@@ -10,6 +10,7 @@ each event in dojoEvents
         var hours = rawDate.getHours();
         var minutes = rawDate.getMinutes();
         dojoDate = event.end.dateTime;
+        rawDate = new Date(dojoDate);
         var endHours = rawDate.getHours();
         var endMinutes = rawDate.getMinutes();
 
