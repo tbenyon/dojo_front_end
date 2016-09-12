@@ -18,6 +18,9 @@ var TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs-quickstart.json';
  */
 exports.authorise = function() {
     return new Promise(function (resolve) {
+        if (!(process.env.dojo_google_client_secret && process.env.dojo_google_client_id && process.env.dojo_google_redirect_uris)) {
+            reject(new Error("Missing Google environment variable."))
+        }
         var clientSecret = process.env.dojo_google_client_secret;
         var clientId = process.env.dojo_google_client_id;
         var redirectUrl = process.env.dojo_google_redirect_uris;
