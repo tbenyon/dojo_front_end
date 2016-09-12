@@ -5,15 +5,15 @@ mixin createUserTable(typeOfUser)
         table(class="table table-striped")
             tr
                 th User Name
-                th Member Since
-                th Birthday
+                th Last Seen
+                th Days to Birthday
 
             each record in users
                 if record.UserType === typeOfUser
                     tr
                         td !{record.NickName}
-                        td !{new Date(record.CreatedDate).toUTCString().split(' ').slice(0, 4).join(' ')}
-                        td #{new Date(record.DOB).getDate()} #{monthNames[new Date(record.DOB).getMonth()]}
+                        td #{new Date(record.Login).getDate()} #{monthNames[new Date(record.Login).getMonth()]}
+                        td #{record.daysToBirthday}
 
 
 include includes/base.jade
