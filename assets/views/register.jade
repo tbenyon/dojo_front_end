@@ -1,0 +1,9 @@
+include includes/base
+    h1 The following people are logged in:
+    table(class="table table-striped")
+        tr
+            th User Name
+        for user in users
+            if user.Logout === null
+                tr
+                    td #{user.NickName}

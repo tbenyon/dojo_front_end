@@ -29,7 +29,7 @@ exports.getUsers = function () {
     return new Promise(function(resolve, reject) {
 
         var userPromise = new Promise(function(resolve, reject) {
-            const userQueryString = 'SELECT User.NickName, User.UserType, R1.Login ' +
+            const userQueryString = 'SELECT User.NickName, User.UserType, R1.Login, R1.Logout ' +
                 'FROM Register AS R1 ' +
                 'LEFT JOIN User ON User.UserID = R1.UserID ' +
                 'WHERE R1.Login = (SELECT MAX(R2.Login) ' +
