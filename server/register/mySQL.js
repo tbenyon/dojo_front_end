@@ -27,7 +27,12 @@ exports.getUsernames = function () {
 
 exports.getUsers = function () {
     return new Promise(function(resolve, reject) {
-        const queryString = 'SELECT `NickName`, `UserType`, `CreatedDate`, `DOB` FROM `User` ORDER BY UserType Asc, CreatedDate Asc;';
+        const queryString = 'SELECT User.NickName, User.UserType, R1.Login ' +
+            'FROM Register AS R1 ' +
+            'LEFT JOIN User ON User.UserID = R1.UserID ' +
+            'WHERE R1.Login = (SELECT MAX(R2.Login) ' +
+            'FROM Register AS R2 ' +
+            'WHERE R2.UserID = R1.UserID);';
         executeQuery(queryString).then(function (data) {
             resolve(data);
         }).catch(function (err) {
