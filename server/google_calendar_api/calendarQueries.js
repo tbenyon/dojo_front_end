@@ -1,6 +1,8 @@
 const google = require('googleapis');
 const googleAuth = require("./googleAuth.js");
 
+googleAuth.authorise();
+
 exports.listCalendarEvents = function() {
     return new Promise(function (resolve, reject) {
         googleAuth.authorise().then(function (auth) {
