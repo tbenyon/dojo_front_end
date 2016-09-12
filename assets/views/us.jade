@@ -6,12 +6,14 @@ mixin createUserTable(typeOfUser)
             tr
                 th User Name
                 th Last Seen
+                th Days to Birthday
 
             each record in users
                 if record.UserType === typeOfUser
                     tr
                         td !{record.NickName}
                         td #{new Date(record.Login).getDate()} #{monthNames[new Date(record.Login).getMonth()]}
+                        td #{record.daysToBirthday}
 
 
 include includes/base.jade

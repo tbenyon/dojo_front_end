@@ -27,20 +27,62 @@ exports.getUsernames = function () {
 
 exports.getUsers = function () {
     return new Promise(function(resolve, reject) {
-        const queryString = 'SELECT User.NickName, User.UserType, R1.Login ' +
-            'FROM Register AS R1 ' +
-            'LEFT JOIN User ON User.UserID = R1.UserID ' +
-            'WHERE R1.Login = (SELECT MAX(R2.Login) ' +
-            'FROM Register AS R2 ' +
-            'WHERE R2.UserID = R1.UserID);';
-        executeQuery(queryString).then(function (data) {
-            resolve(data);
-        }).catch(function (err) {
-            console.error('Failed to get users.' + err);
-            reject(err);
+
+        var userPromise = new Promise(function(resolve, reject) {
+            const userQueryString = 'SELECT User.NickName, User.UserType, R1.Login ' +
+                'FROM Register AS R1 ' +
+                'LEFT JOIN User ON User.UserID = R1.UserID ' +
+                'WHERE R1.Login = (SELECT MAX(R2.Login) ' +
+                'FROM Register AS R2 ' +
+                'WHERE R2.UserID = R1.UserID);';
+
+            executeQuery(userQueryString).then(function (data) {
+                resolve(data);
+            }).catch(function (err) {
+                console.error('Failed to get users.');
+                reject(err);
+            });
         });
+
+        var birthdayPromise = new Promise(function(resolve, reject) {
+            const daysToBirthdayQueryString = 'SELECT ' +
+                'NickName, ' +
+                'abs(IF(' +
+                'right(curdate(), 5) >= right(DOB, 5), ' +
+                'datediff(curdate(), ' +
+                'concat(year(curdate() + INTERVAL 1 YEAR), ' +
+                'right(DOB, 6))), ' +
+                'datediff(concat(year(curdate()), ' +
+                'right(DOB, 6)), ' +
+                'curdate()))) ' +
+                'AS DaysToBirthday ' +
+                'FROM User ' +
+                'ORDER BY DaysToBirthday;';
+
+            executeQuery(daysToBirthdayQueryString).then(function (data) {
+                resolve(data);
+            }).catch(function (err) {
+                console.error('Failed to get days to birthdays.' + err);
+                reject(err);
+            });
+        });
+
+        Promise.all([userPromise, birthdayPromise]).then(function (results) {
+            results[0].forEach(function (user) {
+                var result = results[1].filter(function( obj ) {
+                    return obj.NickName === user.NickName;
+                });
+                user.daysToBirthday = result[0].DaysToBirthday;
+            });
+            resolve(results[0]);
+        }).catch(function (err) {
+            console.error("Failed to complete all promises when getting users.");
+            reject(err);
+        })
     });
 };
+
+
 
 function executeQuery(queryString) {
     return new Promise(function (resolve, reject) {
