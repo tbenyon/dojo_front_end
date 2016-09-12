@@ -32,6 +32,12 @@ app.get('/resources', function(req, res){
     res.render('resources.jade');
 });
 
+app.get('/register', function(req, res){
+    dojo_db.getUsers().then(function (data) {
+        res.render('register.jade', {'users': data});
+    });
+});
+
 app.get('/us', function(req, res){
     dojo_db.getUsers().then(function (data) {
         res.render('us.jade', {'users': data});
