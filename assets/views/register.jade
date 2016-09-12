@@ -1,17 +1,27 @@
 include includes/base
-    - var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    h1 The following people are logged in:
-    table(class="table table-striped")
-        tr
-            th First Name
-            th Last Name
-            th Nick Name
-            th Login date
+    -
+        var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var emptyDojo = true;
+        users.forEach(function(user) {
+            if (user.Logout === null) {
+                emptyDojo = false;
+            }
+        });
+    if emptyDojo
+        h1 No one is logged in
+    else
+        h1 The following people are logged in:
+        table(class="table table-striped")
+            tr
+                th First Name
+                th Last Name
+                th Nick Name
+                th Login date
 
-        for user in users
-            if user.Logout === null
-                tr
-                    td #{user.FirstName}
-                    td #{user.LastName}
-                    td #{user.NickName}
-                    td #{new Date(user.Login).getDate()} #{monthNames[new Date(user.Login).getMonth()]}
+            for user in users
+                if user.Logout === null
+                    tr
+                        td #{user.FirstName}
+                        td #{user.LastName}
+                        td #{user.NickName}
+                        td #{new Date(user.Login).getDate()} #{monthNames[new Date(user.Login).getMonth()]}
