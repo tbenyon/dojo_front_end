@@ -1,9 +1,17 @@
 include includes/base
+    - var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     h1 The following people are logged in:
     table(class="table table-striped")
         tr
-            th User Name
+            th First Name
+            th Last Name
+            th Nick Name
+            th Login date
+
         for user in users
             if user.Logout === null
                 tr
+                    td #{user.FirstName}
+                    td #{user.LastName}
                     td #{user.NickName}
+                    td #{new Date(user.Login).getDate()} #{monthNames[new Date(user.Login).getMonth()]}
