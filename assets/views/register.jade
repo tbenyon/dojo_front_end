@@ -1,23 +1,20 @@
 include includes/base
     -
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth()+1;
-        var yyyy = today.getFullYear();
-        var currentDate = dd + " " + mm + " " + yyyy;
+        var getReformattedDate = function(date) {
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+            return day + " " + month + " " + year;
+        };
 
-    -
+        var currentDate = getReformattedDate(new Date());
+        
         var emptyDojo = true;
-            users.forEach(function(user) {
-                var loginDate = new Date(user.Login)
-                var logoutDate = new Date(user.Logout)
-                var dd = loginDate.getDate();
-                var mm = loginDate.getMonth() + 1;
-                var yyyy = loginDate.getFullYear();
-                var checkDate = dd + " " + mm + " " + yyyy;
-                if (checkDate === currentDate) {
-                    emptyDojo = false;
-                }
+        users.forEach(function(user) {
+            var checkDate = getReformattedDate(new Date(user.Login));
+            if (checkDate === currentDate) {
+                emptyDojo = false;
+            }
         });
 
     if emptyDojo
@@ -39,10 +36,7 @@ include includes/base
                 -
                     var loginDate = new Date(user.Login)
                     var logoutDate = new Date(user.Logout)
-                    var dd = loginDate.getDate();
-                    var mm = loginDate.getMonth() + 1;
-                    var yyyy = loginDate.getFullYear();
-                    var checkDate = dd + " " + mm + " " + yyyy;
+                    var checkDate = getReformattedDate(new Date(user.Login));
                 if currentDate === checkDate
                     tr
                         td #{user.FirstName}
