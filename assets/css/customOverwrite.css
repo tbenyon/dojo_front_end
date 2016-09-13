@@ -29,3 +29,7 @@
 div.panel div.calendarPanel-heading-red {
     color: red;
 }
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #292929;
+}
