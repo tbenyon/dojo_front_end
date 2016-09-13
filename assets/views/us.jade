@@ -13,11 +13,11 @@ mixin createUserTable(typeOfUser)
                     if record.UserType === typeOfUser
                         tr
                             td !{record.NickName}
-                            td #{new Date(record.Login).getDate()} #{monthNames[new Date(record.Login).getMonth()]}
+                            td #{new Date(record.Login).getDate()} #{monthNames[new Date(record.Login).getMonth()]} #{new Date(record.Login).getFullYear()}
                             td #{record.daysToBirthday}
 
 
 include includes/base.jade
-    - var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    - var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     +createUserTable("Student")
     +createUserTable("Mentor")
