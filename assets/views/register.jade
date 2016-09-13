@@ -11,13 +11,16 @@ include includes/base
         h1 No one is logged in
     else
         h1 The following people are logged in:
+        br
         table(class="table table-striped")
-            tr
-                th First Name
-                th Last Name
-                th Nick Name
-                th Login date
+            thead
+                tr
+                    th First Name
+                    th Last Name
+                    th Nick Name
+                    th Login date
 
+            tbody
             for user in users
                 if user.Logout === null
                     tr

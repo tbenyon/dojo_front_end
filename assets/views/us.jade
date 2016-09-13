@@ -3,17 +3,18 @@ mixin createUserTable(typeOfUser)
     div(class="col-md-6")
         h2(align="center")= typeOfUser
         table(class="table table-striped")
-            tr
-                th User Name
-                th Last Seen
-                th Days to Birthday
-
-            each record in users
-                if record.UserType === typeOfUser
-                    tr
-                        td !{record.NickName}
-                        td #{new Date(record.Login).getDate()} #{monthNames[new Date(record.Login).getMonth()]}
-                        td #{record.daysToBirthday}
+            thead
+                tr
+                    th User Name
+                    th Last Seen
+                    th Days to Birthday
+            tbody
+                each record in users
+                    if record.UserType === typeOfUser
+                        tr
+                            td !{record.NickName}
+                            td #{new Date(record.Login).getDate()} #{monthNames[new Date(record.Login).getMonth()]}
+                            td #{record.daysToBirthday}
 
 
 include includes/base.jade
