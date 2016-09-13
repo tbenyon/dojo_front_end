@@ -1,12 +1,25 @@
 include includes/base
     -
-        var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1;
+        var yyyy = today.getFullYear();
+        var currentDate = dd + " " + mm + " " + yyyy;
+
+    -
         var emptyDojo = true;
-        users.forEach(function(user) {
-            if (user.Logout === null) {
-                emptyDojo = false;
-            }
+            users.forEach(function(user) {
+                var loginDate = new Date(user.Login)
+                var logoutDate = new Date(user.Logout)
+                var dd = loginDate.getDate();
+                var mm = loginDate.getMonth() + 1;
+                var yyyy = loginDate.getFullYear();
+                var checkDate = dd + " " + mm + " " + yyyy;
+                if (checkDate === currentDate) {
+                    emptyDojo = false;
+                }
         });
+
     if emptyDojo
         h1 No one is logged in
     else
@@ -18,13 +31,25 @@ include includes/base
                     th First Name
                     th Last Name
                     th Nick Name
-                    th Login date
+                    th Login time
+                    th Logout time
 
             tbody
             for user in users
-                if user.Logout === null
+                -
+                    var loginDate = new Date(user.Login)
+                    var logoutDate = new Date(user.Logout)
+                    var dd = loginDate.getDate();
+                    var mm = loginDate.getMonth() + 1;
+                    var yyyy = loginDate.getFullYear();
+                    var checkDate = dd + " " + mm + " " + yyyy;
+                if currentDate === checkDate
                     tr
                         td #{user.FirstName}
                         td #{user.LastName}
                         td #{user.NickName}
-                        td #{new Date(user.Login).getDate()} #{monthNames[new Date(user.Login).getMonth()]}
+                        td #{loginDate.getHours()}:#{loginDate.getMinutes()}
+                        if logoutDate.getHours() === 0 && logoutDate.getMinutes() === 0
+                            td - - - -
+                        else
+                            td #{logoutDate.getHours()}:#{logoutDate.getMinutes()}
