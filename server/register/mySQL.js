@@ -74,6 +74,11 @@ exports.getUsers = function () {
                 });
                 user.daysToBirthday = result[0].DaysToBirthday;
             });
+            
+            results[0].sort(function(a, b) {
+                return a.daysToBirthday - b.daysToBirthday;
+            });
+
             resolve(results[0]);
         }).catch(function (err) {
             console.error("Failed to complete all promises when getting users.");

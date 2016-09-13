@@ -38,7 +38,7 @@ app.get('/register', function(req, res){
     });
 });
 
-app.get('/us', function(req, res){
+app.get('/members', function(req, res){
     dojo_db.getUsers().then(function (data) {
         res.render('us.jade', {'users': data});
     });
