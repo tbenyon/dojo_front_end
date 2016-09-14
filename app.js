@@ -3,13 +3,23 @@ var app = express();
 const dojo_db = require('./server/register/mySQL.js');
 const favicon = require('serve-favicon');
 const calendar = require("./server/google_calendar_api/calendarQueries.js");
+var session = require('client-sessions');
+var bodyParser = require('body-parser');
 
 app.use(favicon(__dirname + '/assets/images/favicon.ico'));
 
 app.set('view engine', 'pug');
 app.set('views', __dirname+'/assets/views');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use('/assets', express.static(__dirname + '/assets'));
+app.use(session({
+    cookieName: 'session',
+    secret: 'random_string_goes_here',
+    duration: 30 * 60 * 1000,
+    activeDuration: 5 * 60 * 1000
+}));
 
 app.get('/', function(req, res) {
     calendar.listCalendarEvents().then(function (events) {
@@ -17,6 +27,17 @@ app.get('/', function(req, res) {
     }).catch(function (err) {
         console.error("Couldn't retrieve calendar.\n", err);
         res.render('index.jade');
+    });
+});
+
+app.get('/login', function(req, res){
+    res.render('login.jade');
+});
+
+app.post('/login', function(req, res){
+    console.log(req.body);
+    dojo_db.getUsers().then(function (data) {
+        res.render('register.jade', {'users': data});
     });
 });
 
