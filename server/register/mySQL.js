@@ -1,4 +1,5 @@
-var mysql = require('mysql');
+const knex = require('knex')({client: 'mysql'});
+const mysql = require('mysql');
 
 var pool = mysql.createPool({
     connectionLimit: 100,
@@ -20,6 +21,18 @@ exports.getUsernames = function () {
             resolve(user_names);
         }).catch(function (err) {
             console.error('Failed to get user names.');
+            reject(err);
+        });
+    });
+};
+
+exports.login = function(nickName, password) {
+    return new Promise(function (resolve, reject) {
+        const queryString = knex.select('UserType', 'FirstName', 'LastName', 'NickName').from('User').where({'NickName': nickName, 'Password': password}) + ";";
+        executeQuery(queryString).then(function (data) {
+            resolve(data[0]);
+        }).catch(function (err) {
+            console.error('Failed to complete login query.');
             reject(err);
         });
     });
@@ -89,7 +102,7 @@ exports.getUsers = function () {
 
 
 
-function executeQuery(queryString) {
+function executeQuery(queryString, params) {
     return new Promise(function (resolve, reject) {
         pool.getConnection(function(err,connection){
             if (err) {
@@ -107,7 +120,9 @@ function executeQuery(queryString) {
                     resolve(rows);
                     connection.release();
                 } else {
-                    console.error('Error while performing Query.');
+                    console.error('Error while performing Query.\n' +
+                        'Query String = ' + queryString + '\n' +
+                        'Error = ' + err);
                     connection.release();
                     reject(err);
                 }
