@@ -23,6 +23,30 @@ app.use(session({
     activeDuration: 5 * 60 * 1000
 }));
 
+app.use(function (req, res, next) {
+    if (req.session && req.session.user) {
+        dojo_db.nickNameCheck(req.session.user.NickName).then(function (user) {
+            if (user) {
+                req.user = user;
+                delete req.user.password;
+                req.session.user = req.user;
+                res.locals.user = req.user;
+            }
+            next();
+        });
+    } else {
+        next();
+    }
+});
+
+function requireLogin(req, res, next) {
+    if (!req.user) {
+        res.redirect('/login');
+    } else {
+        next();
+    }
+}
+
 function hash(password) {
     const hash = crypto.createHash('sha512');
     hash.update(password + utf8.encode(process.env.dojo_hash_password_salt));
@@ -77,22 +101,10 @@ app.get('/resources', function(req, res){
     res.render('resources.jade');
 });
 
-app.get('/register', function(req, res){
-    if (req.session && req.session.user) {
-        dojo_db.nickNameCheck(req.session.user.NickName).then(function (user) {
-            if (!user) {
-                req.session.reset();
-                res.redirect('/login');
-            } else {
-                res.locals.user = user;
-                dojo_db.getUsers().then(function (data) {
-                    res.render('register.jade', {'users': data});
-                });
-            }
-        });
-    } else {
-        res.redirect('/login');
-    }
+app.get('/register', requireLogin, function(req, res){
+    dojo_db.getUsers().then(function (data) {
+        res.render('register.jade', {'users': data});
+    });
 });
 
 app.get('/logout', function(req, res){
