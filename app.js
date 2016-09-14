@@ -7,6 +7,7 @@ var session = require('client-sessions');
 var bodyParser = require('body-parser');
 const crypto = require('crypto');
 const utf8 = require('utf8');
+const csrf = require('csurf');
 
 app.use(favicon(__dirname + '/assets/images/favicon.ico'));
 
@@ -22,6 +23,7 @@ app.use(session({
     duration: 30 * 60 * 1000,
     activeDuration: 5 * 60 * 1000
 }));
+app.use(csrf());
 
 app.use(function (req, res, next) {
     if (req.session && req.session.user) {
@@ -66,7 +68,7 @@ app.get('/login', function(req, res){
     if (req.session && req.session.user) {
         req.session.reset();
     }
-    res.render('login.jade');
+    res.render('login.jade', {csrfToken: req.csrfToken()});
 });
 
 app.post('/login', function(req, res){
