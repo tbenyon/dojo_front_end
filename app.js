@@ -5,6 +5,8 @@ const favicon = require('serve-favicon');
 const calendar = require("./server/google_calendar_api/calendarQueries.js");
 var session = require('client-sessions');
 var bodyParser = require('body-parser');
+const crypto = require('crypto');
+const utf8 = require('utf8');
 
 app.use(favicon(__dirname + '/assets/images/favicon.ico'));
 
@@ -21,6 +23,12 @@ app.use(session({
     activeDuration: 5 * 60 * 1000
 }));
 
+function hash(password) {
+    const hash = crypto.createHash('sha512');
+    hash.update(password + utf8.encode(process.env.dojo_hash_password_salt));
+    return hash.digest('hex');
+}
+
 app.get('/', function(req, res) {
     calendar.listCalendarEvents().then(function (events) {
         res.render('index.jade', {dojoEvents: events});
@@ -31,11 +39,14 @@ app.get('/', function(req, res) {
 });
 
 app.get('/login', function(req, res){
+    if (req.session && req.session.user) {
+        req.session.reset();
+    }
     res.render('login.jade');
 });
 
 app.post('/login', function(req, res){
-    dojo_db.login(req.body.nickName, req.body.password).then(function (data) {
+    dojo_db.login(req.body.nickName, hash(req.body.password)).then(function (data) {
         if (typeof data === "undefined") {
             res.render('login.jade', {'error': "Username or Password not found."});
         } else if (data.UserType !== "Mentor") {
