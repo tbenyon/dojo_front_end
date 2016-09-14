@@ -36,7 +36,14 @@ app.get('/login', function(req, res){
 
 app.post('/login', function(req, res){
     dojo_db.login(req.body.nickName, req.body.password).then(function (data) {
-        res.render('login.jade', {'loggedInUser': data});
+        if (typeof data === "undefined") {
+            res.render('login.jade', {'error': "Username or Password not found."});
+        } else if (data.UserType !== "Mentor") {
+            res.render('login.jade', {'error': "Only mentors can log in!"});
+        } else {
+            res.render('login.jade', {'loggedInUser': data});
+        }
+
     }).catch(function (err) {
         console.log(err);
         console.error("Failed to login.");

@@ -2,6 +2,10 @@ include includes/base.jade
     if loggedInUser
         h1 Welcome #{loggedInUser.NickName}!
     else
+        if error
+            p
+                font(color="red") #{error}
+
         form(method='POST' action='/login')
 
             div(class="form-group")
