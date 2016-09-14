@@ -39,9 +39,12 @@ app.post('/login', function(req, res){
         if (typeof data === "undefined") {
             res.render('login.jade', {'error': "Username or Password not found."});
         } else if (data.UserType !== "Mentor") {
-            res.render('login.jade', {'error': "Only mentors can log in!"});
+            res.render('login.jade', {'error': "Only mentors can login!"});
         } else {
-            res.render('login.jade', {'loggedInUser': data});
+            req.session.user = data;
+
+            res.redirect('/register');
+
         }
 
     }).catch(function (err) {
@@ -64,9 +67,28 @@ app.get('/resources', function(req, res){
 });
 
 app.get('/register', function(req, res){
-    dojo_db.getUsers().then(function (data) {
-        res.render('register.jade', {'users': data});
-    });
+    if (req.session && req.session.user) {
+        dojo_db.nickNameCheck(req.session.user.NickName).then(function (user) {
+            if (!user) {
+                req.session.reset();
+                res.redirect('/login');
+            } else {
+                res.locals.user = user;
+                dojo_db.getUsers().then(function (data) {
+                    res.render('register.jade', {'users': data});
+                });
+            }
+        });
+    } else {
+        res.redirect('/login');
+    }
+});
+
+app.get('/logout', function(req, res){
+    if (req.session && req.session.user) {
+        req.session.reset();
+    }
+    res.redirect('/login');
 });
 
 app.get('/members', function(req, res){

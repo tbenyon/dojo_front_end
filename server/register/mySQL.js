@@ -38,6 +38,18 @@ exports.login = function(nickName, password) {
     });
 };
 
+exports.nickNameCheck = function(nickName) {
+    return new Promise(function (resolve, reject) {
+        const queryString = knex.select('UserType', 'FirstName', 'LastName', 'NickName').from('User').where({'NickName': nickName}) + ";";
+        executeQuery(queryString).then(function (data) {
+            resolve(data[0]);
+        }).catch(function (err) {
+            console.error('Failed to complete nickNameCheck query.');
+            reject(err);
+        });
+    });
+};
+
 exports.getUsers = function () {
     return new Promise(function(resolve, reject) {
 
