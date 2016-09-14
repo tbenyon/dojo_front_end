@@ -35,9 +35,12 @@ app.get('/login', function(req, res){
 });
 
 app.post('/login', function(req, res){
-    console.log(req.body);
-    dojo_db.getUsers().then(function (data) {
-        res.render('register.jade', {'users': data});
+    dojo_db.login(req.body.nickName, req.body.password).then(function (data) {
+        res.render('login.jade', {'loggedInUser': data});
+    }).catch(function (err) {
+        console.log(err);
+        console.error("Failed to login.");
+        res.send(err);
     });
 });
 

@@ -1,15 +1,18 @@
 include includes/base.jade
-    form(method='POST' action='/login')
+    if loggedInUser
+        h1 Welcome #{loggedInUser.NickName}!
+    else
+        form(method='POST' action='/login')
 
-        div(class="form-group")
-            label Nick Name
+            div(class="form-group")
+                label Nick Name
+                br
+                input(type="text" placeholder="funkyMonkey12" name="nickName" required)
+
+            div(class="form-group")
+                label Password
+                br
+                input(type="text" placeholder="p4ssw0rd" name="password" required)
+
             br
-            input(type="text" placeholder="funkyMonkey12" name="nickName" required)
-
-        div(class="form-group")
-            label Password
-            br
-            input(type="text" placeholder="p4ssw0rd" name="password" required)
-
-        br
-        input(type='submit' value='Submit')
+            input(type='submit' value='Submit')
