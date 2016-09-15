@@ -27,6 +27,9 @@ exports.listCalendarEvents = function() {
                     }
                 }
             });
+        }).catch(function(err) {
+            console.error("Failed to retrieve the calendar through the API");
+            reject(err);
         });
     });
 };
