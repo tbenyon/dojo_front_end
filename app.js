@@ -1,21 +1,28 @@
-var express = require('express');
-var app = express();
+const http = require('http');
+const https = require('https');
+const express = require('express');
+const fs = require('fs');
 const dojo_db = require('./server/register/mySQL.js');
 const favicon = require('serve-favicon');
 const calendar = require("./server/google_calendar_api/calendarQueries.js");
-var session = require('client-sessions');
-var bodyParser = require('body-parser');
+const session = require('client-sessions');
+const bodyParser = require('body-parser');
 const crypto = require('crypto');
 const utf8 = require('utf8');
 const csrf = require('csurf');
 
-app.use(favicon(__dirname + '/assets/images/favicon.ico'));
+var options = {
+    key: fs.readFileSync('./ssl/key.pem'),
+    cert: fs.readFileSync('./ssl/cert.pem')
+};
 
+var app = express();
+
+app.use(favicon(__dirname + '/assets/images/favicon.ico'));
 app.set('view engine', 'pug');
 app.set('views', __dirname+'/assets/views');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 app.use('/assets', express.static(__dirname + '/assets'));
 app.use(session({
     cookieName: 'session',
@@ -131,7 +138,7 @@ app.get('/oauth2callback', function(req, res){
 
 var port = process.env.PORT || 3000;
 
-var server = app.listen(port, function () {
+var server = https.createServer(options, app).listen(port, function () {
     var host = server.address().address;
     var port = server.address().port;
 
