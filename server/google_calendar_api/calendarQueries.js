@@ -27,6 +27,9 @@ exports.listCalendarEvents = function() {
                     }
                 }
             });
+        }).catch(function (err) {
+            console.error("Failed getting custom Google Calendar.");
+            reject(err);
         });
     });
 };
