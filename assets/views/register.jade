@@ -21,33 +21,39 @@ include includes/base
         };
 
         var currentDate = getReformattedDate(new Date());
-        
-        var emptyDojo = true;
+
+        var attendedUsers = [];
+        var numLoggedOut = 0;
+
         users.forEach(function(user) {
             var checkDate = getReformattedDate(new Date(user.Login));
             if (checkDate === currentDate) {
-                emptyDojo = false;
+                attendedUsers.push(user)
+                if (user.Logout === null) {
+                    numLoggedOut += 1;
+                }
             }
         });
 
-    if emptyDojo
+
+    if attendedUsers.length === 0
         h1 No one is logged in
     else
         br
         div(class="col-md-4" align="center")
             div(class="jumbotron")
                 h3 #{"Attended:  "}
-                span(class="badge") 26
+                span(class="badge") #{attendedUsers.length}
 
         div(class="col-md-4" align="center")
             div(class="jumbotron")
                 h3 #{"Logged in:  "}
-                span(class="badge") 16
+                span(class="badge") #{attendedUsers.length - numLoggedOut}
 
         div(class="col-md-4" align="center")
             div(class="jumbotron")
                 h3 #{"Logged out:  "}
-                span(class="badge") 10
+                span(class="badge") #{numLoggedOut}
         br
         br
         br
@@ -70,23 +76,23 @@ include includes/base
 
             tbody
                 - var index = 1
-            each user in users
+            each user in attendedUsers
                 -
                     var loginDate = new Date(user.Login)
                     var logoutDate = new Date(user.Logout)
-                    var checkDate = getReformattedDate(new Date(user.Login));
-                if currentDate === checkDate
-                    tr
-                        td #{index++}
-                        td #{user.FirstName}
-                        td #{user.LastName}
-                        td #{user.NickName}
-                        td #{loginDate.getHours()}:#{loginDate.getMinutes()}
-                        if logoutDate.getHours() === 0 && logoutDate.getMinutes() === 0
-                            td - - - -
-                        else
-                            td #{logoutDate.getHours()}:#{logoutDate.getMinutes()}
-                        if user.ContactNumber
-                            td #{user.ContactNumber}
-                        if user.DOB
-                            td #{getAge(user.DOB)}
+
+                tr
+                    td #{index++}
+                    td #{user.FirstName}
+                    td #{user.LastName}
+                    td #{user.NickName}
+                    td #{loginDate.getHours()}:#{loginDate.getMinutes()}
+                    if logoutDate.getHours() === 0 && logoutDate.getMinutes() === 0
+                        td - - - -
+                    else
+                        td #{logoutDate.getHours()}:#{logoutDate.getMinutes()}
+                    if user.ContactNumber
+                        td #{user.ContactNumber}
+                    if user.DOB
+                        td #{getAge(user.DOB)}
+                        
