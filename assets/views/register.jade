@@ -35,6 +35,9 @@ include includes/base
             }
         });
 
+        attendedUsers.sort(function(a, b) {
+            return b.Login - a.Login;
+        })
 
     if attendedUsers.length === 0
         h1 No one is logged in
