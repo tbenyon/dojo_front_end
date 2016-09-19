@@ -1,5 +1,18 @@
 include includes/base
     -
+        var getAge = function(dateString) {
+            var today = new Date();
+            var birthDate = new Date(dateString);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+
+            return age;
+        };
+
         var getReformattedDate = function(date) {
             var day = date.getDate();
             var month = date.getMonth() + 1;
@@ -20,7 +33,7 @@ include includes/base
     if emptyDojo
         h1 No one is logged in
     else
-        h1 The following people are logged in:
+        h1 The following people attended Dojo today:
         br
         table(class="table table-striped")
             thead
@@ -30,6 +43,10 @@ include includes/base
                     th Nick Name
                     th Login time
                     th Logout time
+                    if users[0].ContactNumber
+                        th Contact Number
+                    if users[0].DOB
+                        th Age
 
             tbody
             for user in users
@@ -47,3 +64,7 @@ include includes/base
                             td - - - -
                         else
                             td #{logoutDate.getHours()}:#{logoutDate.getMinutes()}
+                        if user.ContactNumber
+                            td #{user.ContactNumber}
+                        if user.DOB
+                            td #{getAge(user.DOB)}

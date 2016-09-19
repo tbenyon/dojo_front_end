@@ -105,8 +105,14 @@ app.get('/resources', function(req, res){
     res.render('resources.jade');
 });
 
-app.get('/register', requireLogin, function(req, res){
+app.get('/register', function(req, res){
     dojo_db.getUsers("register").then(function (data) {
+        res.render('register.jade', {'users': data});
+    });
+});
+
+app.get('/registerDetailed', requireLogin, function(req, res){
+    dojo_db.getUsers("registerDetailed").then(function (data) {
         res.render('register.jade', {'users': data});
     });
 });

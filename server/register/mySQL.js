@@ -55,7 +55,9 @@ exports.getUsers = function (requiredFor) {
         var requiredFields;
 
         if (requiredFor === "register") {
-            requiredFields = "User.NickName, User.FirstName, User.LastName, User.UserType, R1.Login, R1.Logout"
+            requiredFields = "User.NickName, User.FirstName, User.LastName, User.UserType, R1.Login, R1.Logout";
+        } else if (requiredFor === "registerDetailed") {
+            requiredFields = "User.NickName, User.FirstName, User.LastName, User.UserType, R1.Login, R1.Logout, User.DOB, User.ContactNumber";
         } else if (requiredFor === "members") {
             requiredFields = "User.NickName, R1.Login, User.UserType"
         } else {
