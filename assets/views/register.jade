@@ -42,18 +42,18 @@ include includes/base
         br
         div(class="col-md-4" align="center")
             div(class="jumbotron")
-                h3 #{"Attended:  "}
-                span(class="badge") #{attendedUsers.length}
+                h3(class="register-counter") #{"Attended:  "}
+                span(class="badge register-counter") #{attendedUsers.length}
 
         div(class="col-md-4" align="center")
             div(class="jumbotron")
-                h3 #{"Logged in:  "}
-                span(class="badge") #{attendedUsers.length - numLoggedOut}
+                h3(class="register-counter") #{"Logged in:  "}
+                span(class="badge register-counter") #{attendedUsers.length - numLoggedOut}
 
         div(class="col-md-4" align="center")
             div(class="jumbotron")
-                h3 #{"Logged out:  "}
-                span(class="badge") #{numLoggedOut}
+                h3(class="register-counter") #{"Logged out:  "}
+                span(class="badge register-counter") #{numLoggedOut}
         br
         br
         br
@@ -95,4 +95,3 @@ include includes/base
                         td #{user.ContactNumber}
                     if user.DOB
                         td #{getAge(user.DOB)}
-                        
