@@ -106,7 +106,7 @@ app.get('/resources', function(req, res){
 });
 
 app.get('/register', requireLogin, function(req, res){
-    dojo_db.getUsers().then(function (data) {
+    dojo_db.getUsers("register").then(function (data) {
         res.render('register.jade', {'users': data});
     });
 });
@@ -119,7 +119,7 @@ app.get('/logout', function(req, res){
 });
 
 app.get('/members', function(req, res){
-    dojo_db.getUsers().then(function (data) {
+    dojo_db.getUsers("members").then(function (data) {
         res.render('us.jade', {'users': data});
     });
 });

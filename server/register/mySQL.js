@@ -50,11 +50,21 @@ exports.nickNameCheck = function(nickName) {
     });
 };
 
-exports.getUsers = function () {
+exports.getUsers = function (requiredFor) {
     return new Promise(function(resolve, reject) {
+        var requiredFields;
+
+        if (requiredFor === "register") {
+            requiredFields = "User.NickName, User.FirstName, User.LastName, User.UserType, R1.Login, R1.Logout"
+        } else if (requiredFor === "members") {
+            requiredFields = "User.NickName, R1.Login, User.UserType"
+        } else {
+            console.error("Required parameter for getUsers query is invalid.");
+            reject(new Error("Required parameter for getUsers query is invalid."));
+        }
 
         var userPromise = new Promise(function(resolve, reject) {
-            const userQueryString = 'SELECT User.NickName, User.FirstName, User.LastName, User.UserType, R1.Login, R1.Logout ' +
+            const userQueryString = 'SELECT ' + requiredFields + ' ' +
                 'FROM Register AS R1 ' +
                 'LEFT JOIN User ON User.UserID = R1.UserID ' +
                 'WHERE R1.Login = (SELECT MAX(R2.Login) ' +
