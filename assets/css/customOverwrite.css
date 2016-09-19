@@ -64,17 +64,41 @@ span.badge {
     font-size: 200%;
 }
 
-.jumbotron {
-    padding: 10px 5px;
-    margin-bottom: 15px;
+.tombotron {
+    padding: 5px 5px 5px 5px;
+    margin-bottom: 30px;
     color: inherit;
     background-color: #332C2F;
+    max-width: 400px;
 }
+
+.tombotron h1,
+.tombotron .h1 {
+    color: inherit; }
+.tombotron p {
+    margin-bottom: 15px;
+    font-size: 21px;
+    font-weight: 200; }
+.tombotron > hr {
+    border-top-color: #181416; }
+.container .tombotron, .container-fluid .tombotron {
+    border-radius: 6px; }
+.tombotron .container {
+    max-width: 100%; }
+@media screen and (min-width: 768px) {
+    .tombotron {
+        padding: 5px 5px 5px 5px }
+    .container .tombotron, .container-fluid .tombotron {
+        padding-left: 5px;
+        padding-right: 5px; }
+    .tombotron h1,
+    .tombotron .h1 {
+        font-size: 63px; } }
 
 h3.register-counter{
     display: inline-block;
 }
 
 span.register-counter {
-    margin-left: 20px;
+    margin-left: 10px;
 }
