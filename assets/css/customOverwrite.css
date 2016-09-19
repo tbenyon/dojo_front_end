@@ -59,3 +59,14 @@ div.panel div.calendarPanel-heading-red {
     border-top: 2px solid #1AB31E; }
 .table .table {
     background-color: #000000; }
+
+span.badge {
+    font-size: 200%;
+}
+
+.jumbotron {
+    padding: 10px 5px;
+    margin-bottom: 15px;
+    color: inherit;
+    background-color: #332C2F;
+}

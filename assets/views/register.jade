@@ -33,11 +33,31 @@ include includes/base
     if emptyDojo
         h1 No one is logged in
     else
+        br
+        div(class="col-md-4" align="center")
+            div(class="jumbotron")
+                h3 #{"Attended:  "}
+                span(class="badge") 26
+
+        div(class="col-md-4" align="center")
+            div(class="jumbotron")
+                h3 #{"Logged in:  "}
+                span(class="badge") 16
+
+        div(class="col-md-4" align="center")
+            div(class="jumbotron")
+                h3 #{"Logged out:  "}
+                span(class="badge") 10
+        br
+        br
+        br
+
         h1 The following people attended Dojo today:
         br
         table(class="table table-striped")
             thead
                 tr
+                    th
                     th First Name
                     th Last Name
                     th Nick Name
@@ -49,13 +69,15 @@ include includes/base
                         th Age
 
             tbody
-            for user in users
+                - var index = 1
+            each user in users
                 -
                     var loginDate = new Date(user.Login)
                     var logoutDate = new Date(user.Logout)
                     var checkDate = getReformattedDate(new Date(user.Login));
                 if currentDate === checkDate
                     tr
+                        td #{index++}
                         td #{user.FirstName}
                         td #{user.LastName}
                         td #{user.NickName}
