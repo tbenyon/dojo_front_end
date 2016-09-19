@@ -82,7 +82,7 @@ app.post('/login', function(req, res){
         } else {
             req.session.user = data;
 
-            res.redirect('/register');
+            res.redirect('/mentor');
 
         }
 
@@ -105,7 +105,11 @@ app.get('/resources', function(req, res){
     res.render('resources.jade');
 });
 
-app.get('/register', function(req, res){
+app.get('/mentor', requireLogin, function(req, res){
+        res.render('mentorDashboard.jade');
+});
+
+app.get('/register', requireLogin, function(req, res){
     dojo_db.getUsers("register").then(function (data) {
         res.render('register.jade', {'users': data});
     });
@@ -121,7 +125,7 @@ app.get('/logout', function(req, res){
     if (req.session && req.session.user) {
         req.session.reset();
     }
-    res.redirect('/login');
+    res.redirect('/');
 });
 
 app.get('/members', function(req, res){

@@ -102,3 +102,23 @@ h3.register-counter{
 span.register-counter {
     margin-left: 10px;
 }
+
+.tom-nav-pills > li {
+    float: left;
+    color: #00b000;
+    background-color: #858585;
+    border-radius: 6px;
+}
+.tom-nav-pills > li > a {
+    border-radius: 4px;
+    color: #00b000;
+    font-weight: bolder;
+    border-color: #858585;
+    border-width: 6px;
+    background-color: #000000;
+    box-shadow: 5px 5px 5px #888888;}
+.tom-nav-pills > li + li {
+    margin-left: 2px; }
+.tom-nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color: #00b000;
+    background-color: #858585; }
