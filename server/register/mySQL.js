@@ -126,31 +126,33 @@ exports.getUsers = function (requiredFor) {
 
 
 
-function executeQuery(queryString, params) {
+function executeQuery(queryString) {
     return new Promise(function (resolve, reject) {
         pool.getConnection(function(err,connection){
+
             if (err) {
                 console.error('Error in connection database');
                 reject(err);
-            }
+            } else {
 
-            connection.on('error', function (err) {
-                console.error('Error in connection database');
-                reject(err);
-            });
-
-            connection.query(queryString, function (err, rows, fields) {
-                if (!err) {
-                    resolve(rows);
-                    connection.release();
-                } else {
-                    console.error('Error while performing Query.\n' +
-                        'Query String = ' + queryString + '\n' +
-                        'Error = ' + err);
-                    connection.release();
+                connection.on('error', function (err) {
+                    console.error('Error in connection database');
                     reject(err);
-                }
-            });
-        })
+                });
+
+                connection.query(queryString, function (err, rows, fields) {
+                    if (!err) {
+                        resolve(rows);
+                        connection.release();
+                    } else {
+                        console.error('Error while performing Query.\n' +
+                            'Query String = ' + queryString + '\n' +
+                            'Error = ' + err);
+                        connection.release();
+                        reject(err);
+                    }
+                });
+            }
+        });
     });
 }
