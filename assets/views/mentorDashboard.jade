@@ -1,3 +1,10 @@
 include includes/base.jade
     include includes/mentorNav.jade
-    h1 Interesting data to follow here . . .
+    script
+        include ../js/Chart.bundle.min.js
+        include ../js/attendance.js
+    div
+        h1 Attendance Graph
+        canvas(id="attendanceChart" width="400" height="200")
+        script
+                include ../js/attendance.js
