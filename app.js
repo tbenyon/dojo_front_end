@@ -109,19 +109,19 @@ app.get('/mentor', requireLogin, function(req, res){
         res.render('mentorDashboard.jade');
 });
 
-app.get('/register', requireLogin, function(req, res){
+app.get('/mentor/register', requireLogin, function(req, res){
     dojo_db.getUsers("register").then(function (data) {
         res.render('register.jade', {'users': data});
     });
 });
 
-app.get('/registerDetailed', requireLogin, function(req, res){
+app.get('/mentor/registerDetailed', requireLogin, function(req, res){
     dojo_db.getUsers("registerDetailed").then(function (data) {
         res.render('register.jade', {'users': data});
     });
 });
 
-app.get('/logout', function(req, res){
+app.get('/mentor/logout', function(req, res){
     if (req.session && req.session.user) {
         req.session.reset();
     }
