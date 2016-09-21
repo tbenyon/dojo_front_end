@@ -6,8 +6,15 @@ include includes/base.jade
     div
         h1 Attendance Graph
         br
-        canvas(id="attendanceChart" width="400" height="100")
+        canvas(id="attendanceChart" width="400" height="150")
+        br
+        br
+        div(class="col-md-6")
+            h1 Most Attended Dojos
+            br
+            canvas(id="attendanceTopScores" width="100" height="200")
         script(type='text/javascript').
             var attendanceData =!{JSON.stringify(attendanceData)};
+            var attendanceTopScoresData =!{JSON.stringify(attendanceTopScoresData)};
         script
             include ../js/attendance.js

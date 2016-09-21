@@ -84,6 +84,21 @@ exports.login = function(nickName, password) {
     });
 };
 
+exports.getAttendanceTopScores = function() {
+    return new Promise(function (resolve, reject) {
+        const queryString = 'SELECT User.NickName, User.UserType, COUNT(DISTINCT Register.DojoID) AS count ' +
+            'FROM Register LEFT JOIN User ON Register.UserID = User.UserID ' +
+            'GROUP BY Register.UserID ' +
+            'ORDER BY count DESC;';
+        executeQuery(queryString).then(function (data) {
+            resolve(data);
+        }).catch(function (err) {
+            console.error('Failed to complete login query.');
+            reject(err);
+        });
+    });
+};
+
 exports.nickNameCheck = function(nickName) {
     return new Promise(function (resolve, reject) {
         const queryString = knex.select('UserType', 'FirstName', 'LastName', 'NickName').from('User').where({'NickName': nickName}) + ";";

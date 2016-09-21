@@ -89,3 +89,38 @@ var attendanceChart = new Chart(ctx, {
         }
     }
 });
+
+var topScoresLabels = [];
+var topScoresData = [];
+attendanceTopScoresData.forEach(function (score) {
+    topScoresLabels.push(score.NickName);
+    topScoresData.push(score.count);
+});
+
+Chart.defaults.global.legend.display = false;
+
+var ctx2 = document.getElementById("attendanceTopScores").getContext("2d");
+
+var attendanceTopScores = new Chart(ctx2, {
+    type: 'horizontalBar',
+    legend: {
+        display: false
+    },
+    data: {
+        labels: topScoresLabels,
+        datasets: [new DataSet("Top Scores", topScoresData, "75,255,100")]
+    },
+    options: {
+        scales: {
+            xAxes: [{
+                stacked: true
+            }],
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                },
+                stacked: true
+            }]
+        }
+    }
+});

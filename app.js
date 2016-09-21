@@ -106,13 +106,15 @@ app.get('/resources', function(req, res){
 });
 
 app.get('/mentor', requireLogin, function(req, res){
-    dojo_db.getDojoAttendance().then(function (data) {
-        res.render('mentorDashboard.jade', {attendanceData:
-            {
-                all: data[0],
-                student: data[1],
-                mentor: data[2]
-            }
+    Promise.all([dojo_db.getDojoAttendance(), dojo_db.getAttendanceTopScores()]).then(function (data) {
+        res.render('mentorDashboard.jade', {
+            attendanceTopScoresData: data[1],
+            attendanceData:
+                {
+                    all: data[0][0],
+                    student: data[0][1],
+                    mentor: data[0][2]
+                }
         });
     }).catch(function (err) {
         console.error("Error getting attendance data.\n" + err);
