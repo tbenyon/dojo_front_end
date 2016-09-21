@@ -41,7 +41,7 @@ var DataSet = function (label, data, lineColour) {
     this.label = label;
     this.fill = false;
     this.lineTension = 0.1;
-    this.backgroundColor = "rgba(" + lineColour + ",0.4)";
+    this.backgroundColor = "rgba(" + lineColour + ",9)";
     this.borderColor = "rgba(" + lineColour + ",1)";
     this.borderCapStyle = 'butt';
     this.borderDash = [];
@@ -63,22 +63,24 @@ var DataSet = function (label, data, lineColour) {
 var data = {
     labels: labels,
     datasets: [
-        new DataSet("Total", allData, "255,255,255"),
-        new DataSet("Mentors", mentorData, "255,50,50"),
-        new DataSet("Students", studentData, "75,255,100")
-
+        new DataSet("Students", studentData, "75,255,100"),
+        new DataSet("Mentors", mentorData, "255,50,50")
     ]
 };
 
 var attendanceChart = new Chart(ctx, {
-    type: 'line',
+    type: 'bar',
     data: data,
     options: {
         scales: {
+            xAxes: [{
+                stacked: true
+            }],
             yAxes: [{
                 ticks: {
                     beginAtZero:true
-                }
+                },
+                stacked: true
             }]
         }
     }
