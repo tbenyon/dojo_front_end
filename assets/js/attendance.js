@@ -89,6 +89,33 @@ var attendanceChart = new Chart(ctx, {
         }
     }
 });
+var studentCount = 0;
+var mentorCount = 0;
+attendanceTopScoresData.forEach(function (user) {
+   if (user.UserType === "Mentor") {
+        mentorCount += 1;
+   } else if (user.UserType === "Student") {
+       studentCount += 1;
+   }
+});
+
+console.log(studentCount);
+
+var ctx2 = document.getElementById("memberCounter").getContext("2d");
+
+var attendanceTopScores = new Chart(ctx2, {
+    type: 'pie',
+    data: {
+        labels: ["Students", "Mentors"],
+        datasets: [{
+            data: [studentCount, mentorCount],
+            backgroundColor: [
+                "rgba(75,255,100,9)",
+                "rgba(255,50,50,9)"
+            ]
+        }]
+    }
+});
 
 var topScoresLabels = [];
 var topScoresData = [];
@@ -99,9 +126,9 @@ attendanceTopScoresData.forEach(function (score) {
 
 Chart.defaults.global.legend.display = false;
 
-var ctx2 = document.getElementById("attendanceTopScores").getContext("2d");
+var ctx3 = document.getElementById("attendanceTopScores").getContext("2d");
 
-var attendanceTopScores = new Chart(ctx2, {
+var attendanceTopScores = new Chart(ctx3, {
     type: 'horizontalBar',
     legend: {
         display: false
