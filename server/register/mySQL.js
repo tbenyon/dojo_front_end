@@ -38,7 +38,27 @@ var getDojoAttendance = function () {
             });
         });
 
-        Promise.all([allCount]).then(function (values) {
+        var studentCount = new Promise(function(resolve, reject) {
+            const queryString = 'SELECT Register.DojoID, COUNT(DISTINCT Register.UserID) AS count FROM Register LEFT JOIN User ON Register.UserID = User.UserID WHERE User.UserType = "Student" GROUP BY Register.DojoID;';
+            executeQuery(queryString).then(function (data) {
+                resolve(data);
+            }).catch(function (err) {
+                console.error('Failed to get dojos.');
+                reject(err);
+            });
+        });
+
+        var mentorCount = new Promise(function(resolve, reject) {
+            const queryString = 'SELECT Register.DojoID, COUNT(DISTINCT Register.UserID) AS count FROM Register LEFT JOIN User ON Register.UserID = User.UserID WHERE User.UserType = "Mentor" GROUP BY Register.DojoID;';
+            executeQuery(queryString).then(function (data) {
+                resolve(data);
+            }).catch(function (err) {
+                console.error('Failed to get dojos.');
+                reject(err);
+            });
+        });
+
+        Promise.all([allCount, studentCount, mentorCount]).then(function (values) {
             resolve(values);
         }).catch(function (err) {
             console.error("Failed to complete all attendance promises.");
