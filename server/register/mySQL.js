@@ -26,6 +26,22 @@ exports.getUsernames = function () {
     });
 };
 
+var getDojoAttendance = function () {
+    return new Promise(function(resolve, reject) {
+        const queryString = 'SELECT DojoID, COUNT(DISTINCT UserID) AS count FROM Register GROUP BY DojoID;';
+        executeQuery(queryString).then(function (data) {
+            resolve(data);
+        }).catch(function (err) {
+            console.error('Failed to get dojos.');
+            reject(err);
+        });
+    });
+};
+
+getDojoAttendance().then(function (data) {
+    console.log(data);
+});
+
 exports.login = function(nickName, password) {
     return new Promise(function (resolve, reject) {
         const queryString = knex.select('UserType', 'FirstName', 'LastName', 'NickName').from('User').where({'NickName': nickName, 'Password': password}) + ";";
