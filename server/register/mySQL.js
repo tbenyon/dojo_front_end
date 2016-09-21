@@ -29,7 +29,8 @@ exports.getUsernames = function () {
 exports.getDojoAttendance = function () {
     return new Promise(function(resolve, reject) {
         var allCount = new Promise(function(resolve, reject) {
-            const queryString = 'SELECT DojoID, COUNT(DISTINCT UserID) AS count FROM Register GROUP BY DojoID;';
+            const queryString = 'SELECT Register.DojoID, Dojo.DojoDate, COUNT(DISTINCT Register.UserID) AS count ' +
+                'FROM Register LEFT JOIN Dojo ON Dojo.DojoID = Register.DojoID GROUP BY DojoID;';
             executeQuery(queryString).then(function (data) {
                 resolve(data);
             }).catch(function (err) {

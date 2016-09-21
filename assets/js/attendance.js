@@ -1,7 +1,10 @@
 var labels = [];
 var allData = [];
+var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 attendanceData.all.forEach(function (dojo) {
-    labels.push(dojo.DojoID);
+    var date = new Date(dojo.DojoDate);
+    date = date.getDate() + " " + monthNames[date.getMonth()] + " " + date.getFullYear();
+    labels.push(date);
     allData.push(dojo.count);
 });
 
