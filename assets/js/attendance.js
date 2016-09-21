@@ -1,3 +1,40 @@
+var labels = [];
+var allData = [];
+attendanceData.all.forEach(function (dojo) {
+    labels.push(dojo.DojoID);
+    allData.push(dojo.count);
+});
+
+var mentorData = [];
+var found;
+attendanceData.all.forEach(function (allDojo) {
+    found = false;
+    attendanceData.mentor.forEach(function (mentorDojo) {
+        if (allDojo.DojoID === mentorDojo.DojoID) {
+            mentorData.push(mentorDojo.count);
+            found = true;
+        }
+    });
+    if (found === false) {
+        mentorData.push(0);
+    }
+});
+
+var studentData = [];
+var found;
+attendanceData.all.forEach(function (allDojo) {
+    found = false;
+    attendanceData.student.forEach(function (studentDojo) {
+        if (allDojo.DojoID === studentDojo.DojoID) {
+            studentData.push(studentDojo.count);
+            found = true;
+        }
+    });
+    if (found === false) {
+        studentData.push(0);
+    }
+});
+
 var ctx = document.getElementById("attendanceChart").getContext("2d");
 
 var DataSet = function (label, data, lineColour) {
@@ -24,10 +61,12 @@ var DataSet = function (label, data, lineColour) {
 };
 
 var data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: labels,
     datasets: [
-        new DataSet("Mentors", [1,9,3,3,5,23,4], "255,50,50"),
-        new DataSet("Students", [12,5,1,3,5,3,4], "75,255,100")
+        new DataSet("Total", allData, "255,255,255"),
+        new DataSet("Mentors", mentorData, "255,50,50"),
+        new DataSet("Students", studentData, "75,255,100")
+
     ]
 };
 

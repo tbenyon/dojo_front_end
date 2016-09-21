@@ -5,6 +5,9 @@ include includes/base.jade
         include ../js/attendance.js
     div
         h1 Attendance Graph
-        canvas(id="attendanceChart" width="400" height="200")
+        br
+        canvas(id="attendanceChart" width="400" height="100")
+        script(type='text/javascript').
+            var attendanceData =!{JSON.stringify(attendanceData)};
         script
-                include ../js/attendance.js
+            include ../js/attendance.js

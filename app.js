@@ -106,7 +106,19 @@ app.get('/resources', function(req, res){
 });
 
 app.get('/mentor', requireLogin, function(req, res){
+    dojo_db.getDojoAttendance().then(function (data) {
+        res.render('mentorDashboard.jade', {attendanceData:
+            {
+                all: data[0],
+                student: data[1],
+                mentor: data[2]
+            }
+        });
+    }).catch(function (err) {
+        console.error("Error getting attendance data.\n" + err);
         res.render('mentorDashboard.jade');
+    });
+
 });
 
 app.get('/mentor/register', requireLogin, function(req, res){

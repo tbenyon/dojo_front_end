@@ -26,7 +26,7 @@ exports.getUsernames = function () {
     });
 };
 
-var getDojoAttendance = function () {
+exports.getDojoAttendance = function () {
     return new Promise(function(resolve, reject) {
         var allCount = new Promise(function(resolve, reject) {
             const queryString = 'SELECT DojoID, COUNT(DISTINCT UserID) AS count FROM Register GROUP BY DojoID;';
@@ -70,10 +70,6 @@ var getDojoAttendance = function () {
         })
     });
 };
-
-getDojoAttendance().then(function (data) {
-    console.log(data);
-});
 
 exports.login = function(nickName, password) {
     return new Promise(function (resolve, reject) {
