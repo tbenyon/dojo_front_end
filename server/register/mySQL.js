@@ -39,7 +39,9 @@ var getDojoAttendance = function () {
         });
 
         var studentCount = new Promise(function(resolve, reject) {
-            const queryString = 'SELECT Register.DojoID, COUNT(DISTINCT Register.UserID) AS count FROM Register LEFT JOIN User ON Register.UserID = User.UserID WHERE User.UserType = "Student" GROUP BY Register.DojoID;';
+            const queryString = 'SELECT Register.DojoID, COUNT(DISTINCT Register.UserID) AS count ' +
+                'FROM Register LEFT JOIN User ON Register.UserID = User.UserID ' +
+                'WHERE User.UserType = "Student" GROUP BY Register.DojoID;';
             executeQuery(queryString).then(function (data) {
                 resolve(data);
             }).catch(function (err) {
@@ -49,7 +51,9 @@ var getDojoAttendance = function () {
         });
 
         var mentorCount = new Promise(function(resolve, reject) {
-            const queryString = 'SELECT Register.DojoID, COUNT(DISTINCT Register.UserID) AS count FROM Register LEFT JOIN User ON Register.UserID = User.UserID WHERE User.UserType = "Mentor" GROUP BY Register.DojoID;';
+            const queryString = 'SELECT Register.DojoID, COUNT(DISTINCT Register.UserID) AS count ' +
+                'FROM Register LEFT JOIN User ON Register.UserID = User.UserID ' +
+                'WHERE User.UserType = "Mentor" GROUP BY Register.DojoID;';
             executeQuery(queryString).then(function (data) {
                 resolve(data);
             }).catch(function (err) {
