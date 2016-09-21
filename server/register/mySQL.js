@@ -28,13 +28,22 @@ exports.getUsernames = function () {
 
 var getDojoAttendance = function () {
     return new Promise(function(resolve, reject) {
-        const queryString = 'SELECT DojoID, COUNT(DISTINCT UserID) AS count FROM Register GROUP BY DojoID;';
-        executeQuery(queryString).then(function (data) {
-            resolve(data);
-        }).catch(function (err) {
-            console.error('Failed to get dojos.');
-            reject(err);
+        var allCount = new Promise(function(resolve, reject) {
+            const queryString = 'SELECT DojoID, COUNT(DISTINCT UserID) AS count FROM Register GROUP BY DojoID;';
+            executeQuery(queryString).then(function (data) {
+                resolve(data);
+            }).catch(function (err) {
+                console.error('Failed to get dojos.');
+                reject(err);
+            });
         });
+
+        Promise.all([allCount]).then(function (values) {
+            resolve(values);
+        }).catch(function (err) {
+            console.error("Failed to complete all attendance promises.");
+            reject(err);
+        })
     });
 };
 
