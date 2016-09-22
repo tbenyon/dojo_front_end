@@ -76,9 +76,9 @@ app.get('/login', function(req, res){
 app.post('/login', function(req, res){
     dojo_db.login(req.body.nickName, hash(req.body.password)).then(function (data) {
         if (typeof data === "undefined") {
-            res.render('login.jade', {'error': "Username or Password not found."});
+            res.render('login.jade', {csrfToken: req.csrfToken(), 'error': "Username or Password not found."});
         } else if (data.UserType !== "Mentor") {
-            res.render('login.jade', {'error': "Only mentors can login!"});
+            res.render('login.jade', {csrfToken: req.csrfToken(), 'error': "Only mentors can login!"});
         } else {
             req.session.user = data;
 
