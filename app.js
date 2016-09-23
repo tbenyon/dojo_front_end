@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use('/assets', express.static(__dirname + '/assets'));
 app.use(session({
     cookieName: 'session',
-    secret: 'random_string_goes_here',
+    secret: process.env.dojo_session_secret,
     duration: 30 * 60 * 1000,
     activeDuration: 5 * 60 * 1000,
     httpOnly: true,
