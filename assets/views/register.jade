@@ -30,7 +30,7 @@ include includes/base
             var checkDate = getReformattedDate(new Date(user.Login));
             if (checkDate === currentDate) {
                 attendedUsers.push(user)
-                if (user.Logout === null) {
+                if (user.Logout !== null) {
                     numLoggedOut += 1;
                 }
             }
