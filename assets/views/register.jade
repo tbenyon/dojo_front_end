@@ -90,11 +90,11 @@ include includes/base
                     td #{user.FirstName}
                     td #{user.LastName}
                     td #{user.NickName}
-                    td #{loginDate.getHours()}:#{loginDate.getMinutes()}
+                    td #{loginDate.getHours() < 10 ? "0" + loginDate.getHours() : loginDate.getHours()}:#{loginDate.getMinutes() < 10 ? "0" + loginDate.getMinutes() : loginDate.getMinutes()}
                     if logoutDate.getHours() === 0 && logoutDate.getMinutes() === 0
                         td - - - -
                     else
-                        td #{logoutDate.getHours()}:#{logoutDate.getMinutes()}
+                        td #{logoutDate.getHours() < 10 ? "0" + logoutDate.getHours() : logoutDate.getHours()}:#{logoutDate.getMinutes() < 10 ? "0" + logoutDate.getMinutes() : logoutDate.getMinutes()}
                     if user.ContactNumber
                         td #{user.ContactNumber}
                     if user.DOB
