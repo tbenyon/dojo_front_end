@@ -12,7 +12,7 @@ body {
 }
 
 form {
-  @include border-radius(10px);
+  @include border-radius(25px);
   align: center;
   border: 3px solid;
   margin: 8px;
@@ -20,5 +20,18 @@ form {
 
   button {
     @include border-radius(100px);
+  }
+
+
+}
+
+#loginForm {
+  margin-right:auto;
+  margin-left:auto;
+  text-align: center;
+  max-width: 250px;
+
+  input {
+    text-align: center;
   }
 }

@@ -1,13 +1,11 @@
 include includes/base.jade
+
     if loggedInUser
         h1 Welcome #{loggedInUser.NickName}!
     else
-        if error
-            p
-                font(color="red") #{error}
-
-        form(method='POST' action='/login')
-
+        form(method='POST' action='/login' id="loginForm")
+            h1 Login
+            br
             input(type="hidden" name='_csrf' value=csrfToken)
 
             div(class="form-group")
@@ -20,5 +18,4 @@ include includes/base.jade
                 br
                 input(type="password" placeholder="p4ssw0rd" name="password" required)
 
-            br
             input(type='submit' value='Submit')
