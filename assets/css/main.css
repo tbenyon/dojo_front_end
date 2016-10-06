@@ -23,3 +23,6 @@ form {
   max-width: 250px; }
   #loginForm input {
     text-align: center; }
+
+.dojo-logo {
+  max-width: 100px; }

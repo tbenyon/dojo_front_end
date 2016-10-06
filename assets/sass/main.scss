@@ -36,6 +36,12 @@ form {
   }
 }
 
-.dojo_logo {
+@mixin dropShadow() {
+  -moz-box-shadow: 0 0 15px #fff;
+  -webkit-box-shadow: 0 0 15px #fff;
+  box-shadow: 0px 0px 15px #fff;
+}
 
+.dojo-logo {
+  max-width: 100px;
 }
