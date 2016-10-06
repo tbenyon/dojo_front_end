@@ -1,0 +1,17 @@
+body {
+  background-color: #000; }
+
+form {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background-clip: padding-box;
+  /* stops bg color from leaking outside the border: */
+  align: center;
+  border: 3px solid;
+  margin: 8px;
+  padding: 12px; }
+  form button {
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+    background-clip: padding-box;
+    /* stops bg color from leaking outside the border: */ }
