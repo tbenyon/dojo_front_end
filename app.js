@@ -93,6 +93,10 @@ app.post('/login', function(req, res){
     });
 });
 
+app.get('/merchandise', function(req, res){
+    res.render('merchandise.jade');
+});
+
 app.get('/contact-us', function(req, res){
     res.render('contact_us.jade');
 });
