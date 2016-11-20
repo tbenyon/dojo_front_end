@@ -122,3 +122,14 @@ span.register-counter {
 .tom-nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
     color: #00b000;
     background-color: #373737; }
+
+.merchandise_demo_images {
+    text-align: center;
+}
+
+.merchandise_demo_images img{
+    max-width: 250px;
+    border-radius: 50%;
+    border: 5px solid #1AB31E;
+    margin: 20px
+}
