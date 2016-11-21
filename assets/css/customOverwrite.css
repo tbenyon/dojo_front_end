@@ -133,3 +133,8 @@ span.register-counter {
     border: 5px solid #1AB31E;
     margin: 20px
 }
+
+.merchandise_demo_images img:hover{
+    transition-duration: 1s;
+    transform: scale(1.2) rotate(5deg);
+}
