@@ -1,0 +1,42 @@
+- var products = ["Child Hoody", "Child T-Shirt", "Adult Hoody", "Adult T-Shirt"]
+
+form#merchForm
+    .form-group
+      label(for='email') Email address
+      input#email.form-control(type='email', aria-describedby='emailHelp', placeholder='Enter email')
+      small#emailHelp.form-text.text-muted An invoice will be sent to this address.
+    .form-group
+      label(for='productSelect') Product
+      select(onchange="getAutocompleteData(this.value)" id="productSelect" class="form-control")
+          each product in products
+            if data && data.item == product
+              option(selected) #{product}
+            else
+              option #{product}
+
+    .form-group
+      label(for='size') Size
+      select#size.form-control
+        if data
+            each size in data.sizes
+                option #{size}
+
+    .form-group
+        label(for='colour') Size
+        select#colour.form-control
+            if data
+                each colour in data.colours
+                    option #{colour}
+    .form-group
+      label(for='Quantity') Quantity
+      select#Quantity.form-control
+        option 1
+        option 2
+        option 3
+        option 4
+        option 5
+    .form-group
+      label(for='exampleTextarea') Additional details or queries for this product
+      textarea#exampleTextarea.form-control(rows='3')
+
+    button.btn.btn-primary(type='submit') Submit

@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 const crypto = require('crypto');
 const utf8 = require('utf8');
 const csrf = require('csurf');
+const merchPopulate = require('./merchandiseAutopopulate.js');
 
 app.use(favicon(__dirname + '/assets/images/favicon.ico'));
 
@@ -94,7 +95,15 @@ app.post('/login', function(req, res){
 });
 
 app.get('/merchandise', function(req, res){
-    res.render('merchandise.jade');
+    var item = req.param('item');
+    if (!item) {
+        res.render('merchandise.jade');
+    } else {
+        var data = merchPopulate.getAutocompleteData(item);
+        data.item = item;
+        res.render('merchandise.jade', {data: data});
+    }
+
 });
 
 app.get('/contact-us', function(req, res){
