@@ -111,7 +111,8 @@ app.post('/merchandise/add', function(req, res){
     var basket = req.session.basket;
 
     if (!(basket)) {
-        basket = [];
+        req.session.basket = [];
+        basket = req.session.basket;
     }
     delete basket._csrf;
     req.session.basket.push(req.body);
