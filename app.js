@@ -114,7 +114,7 @@ app.post('/merchandise/add', function(req, res){
         req.session.basket = [];
         basket = req.session.basket;
     }
-    delete basket._csrf;
+    delete req.body._csrf;
     req.session.basket.push(req.body);
     res.render('merchandise.jade', {csrfToken: req.csrfToken(), basket: basket});
 });
