@@ -1,13 +1,16 @@
 - var products = ["Child Hoody", "Child T-Shirt", "Adult Hoody", "Adult T-Shirt"]
 
-form#merchForm
+form(method="post" action="/merchandise/add")#merchForm
     //.form-group
     //  label(for='email') Email address
     //  input#email.form-control(type='email', aria-describedby='emailHelp', placeholder='Enter email')
     //  small#emailHelp.form-text.text-muted An invoice will be sent to this address.
+
+    input(type="hidden" name='_csrf' value=csrfToken)
+
     .form-group
       label(for='product') Product
-      select(onchange="getAutocompleteData(this.value)" id="product" class="form-control")
+      select(onchange="getAutocompleteData(this.value)" id="product" name='product' class="form-control")
         option
           each product in products
             if data && data.item == product
@@ -17,19 +20,19 @@ form#merchForm
     if data
         .form-group
           label(for='size') Size
-          select#size.form-control
+          select(name='size' )#size.form-control
             if data
                 each size in data.sizes
                     option #{size}
 
         .form-group
             label(for='colour') Colour
-            select#colour.form-control
+            select(name='colour')#colour.form-control
                 if data
                     each colour in data.colours
                         option #{colour}
         .form-group
-          label(for='quantity') Quantity
+          label(for='quantity' name='quantity') Quantity
           select#quantity.form-control
             option 1
             option 2
@@ -40,5 +43,4 @@ form#merchForm
           label(for='details') Additional details or queries for this product
           textarea#details.form-control(rows='3')
 
-if data
-    button.btn.btn-primary(onclick="validateAndStore()") Add item(s)
+        button.btn.btn-primary Add item(s)

@@ -101,9 +101,14 @@ app.get('/merchandise', function(req, res){
     } else {
         var data = merchPopulate.getAutocompleteData(item);
         data.item = item;
-        res.render('merchandise.jade', {data: data});
+        res.render('merchandise.jade', {csrfToken: req.csrfToken(), data: data});
     }
 
+});
+
+app.post('/merchandise/add', function(req, res){
+    console.log(req.body);
+    res.render('merchandise.jade', {csrfToken: req.csrfToken()});
 });
 
 app.get('/contact-us', function(req, res){
