@@ -95,20 +95,27 @@ app.post('/login', function(req, res){
 });
 
 app.get('/merchandise', function(req, res){
+    var basket = req.session.basket;
     var item = req.param('item');
     if (!item) {
-        res.render('merchandise.jade');
+        res.render('merchandise.jade', {basket: basket});
     } else {
         var data = merchPopulate.getAutocompleteData(item);
         data.item = item;
-        res.render('merchandise.jade', {csrfToken: req.csrfToken(), data: data});
+        res.render('merchandise.jade', {csrfToken: req.csrfToken(), data: data, basket: basket});
     }
 
 });
 
 app.post('/merchandise/add', function(req, res){
-    console.log(req.body);
-    res.render('merchandise.jade', {csrfToken: req.csrfToken()});
+    var basket = req.session.basket;
+
+    if (!(basket)) {
+        basket = [];
+    }
+    delete basket._csrf;
+    req.session.basket.push(req.body);
+    res.render('merchandise.jade', {csrfToken: req.csrfToken(), basket: basket});
 });
 
 app.get('/contact-us', function(req, res){
