@@ -1,6 +1,6 @@
 [
   {
-    "name": "Adult Hoody",
+    "name": "Adult Hoody (£12+VAT)",
     "price": 14.4,
     "sizes": ["S", "M", "L", "XL", "XXL"],
     "colours": ["Black with green text", "Grey with white text", "Hot Pink with white text"],
@@ -8,7 +8,7 @@
   },
 
   {
-    "name": "Child Hoody",
+    "name": "Child Hoody (£12)",
     "price": 12,
     "sizes": ["XS", "M", "L", "XL"],
     "colours": ["Black with green text", "Grey with white text", "Hot Pink with white text"],
@@ -16,15 +16,15 @@
   },
 
   {
-    "name": "Adult T-Shirt",
+    "name": "Adult T-Shirt (£6.95+VAT)",
     "price": 8.34,
     "sizes": ["S", "M", "L", "XL", "XXL"],
-    "colours": ["Black with green text", "Grey with white text", "Hot Pink with white text"],
+    "colours": ["Black with green text", "Grey with green text", "Hot Pink with white text"],
     "link": "http://www.our-catalogue.com/email.php?p=SS6&ref=OSUN"
   },
 
   {
-    "name": "Child T-Shirt",
+    "name": "Child T-Shirt (£6.95)",
     "price": 6.95,
     "sizes": ["Age 5-6", "Age 7-8", "Age 9-11", "Age 12-13", "Age 14-15"],
     "colours": ["Black with green text", "Grey with white text", "Hot Pink with white text"],
