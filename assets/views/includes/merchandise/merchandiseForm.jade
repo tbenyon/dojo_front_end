@@ -1,0 +1,50 @@
+- var products = ["Child Hoody", "Child T-Shirt", "Adult Hoody", "Adult T-Shirt"]
+
+form(method="post" action="/merchandise/add")#merchForm
+    input(type="hidden" name='_csrf' value=csrfToken)
+
+    .form-group
+      if data
+        label(for='product') Product
+      else
+          h3 Please choose a product:
+      select(onchange="getAutocompleteData(this.value)" id="product" name='product' class="form-control")
+        option
+          each product in products
+            if data && data.item == product
+              option(selected) #{product}
+            else
+              option #{product}
+    if data
+        .form-group
+            label(for='name') Name to be printed on the front
+            input(name='name' required)#name.form-control
+
+        .form-group
+          label(for='size') Size
+            a(href="#{data.link}") &#32; (Click here for size details)
+
+          select(name='size' )#size.form-control
+            if data
+                each size in data.sizes
+                    option #{size}
+
+        .form-group
+            label(for='colour') Colour
+            select(name='colour')#colour.form-control
+                if data
+                    each colour in data.colours
+                        option #{colour}
+        .form-group
+          label(for='quantity') Quantity
+          select(name='quantity')#quantity.form-control
+            option 1
+            option 2
+            option 3
+            option 4
+            option 5
+        .form-group
+          label(for='details') Additional details or queries for this product
+          textarea#details.form-control(name='details' rows='3')
+
+        button.btn.btn-primary Add item(s)

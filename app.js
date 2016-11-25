@@ -8,11 +8,26 @@ var bodyParser = require('body-parser');
 const crypto = require('crypto');
 const utf8 = require('utf8');
 const csrf = require('csurf');
+const merchPopulate = require('./merchandiseAutopopulate.js');
+var mailer = require('express-mailer');
 
 app.use(favicon(__dirname + '/assets/images/favicon.ico'));
 
-app.set('view engine', 'pug');
+app.set('view engine', 'jade');
 app.set('views', __dirname+'/assets/views');
+
+mailer.extend(app, {
+    from: 'horshamdojomentor@gmail.com',
+    host: 'smtp.gmail.com', // hostname
+    secureConnection: true, // use SSL
+    port: 465, // port for secure SMTP
+    transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
+    auth: {
+        user: process.env.dojo_email,
+        pass: process.env.dojo_email_password
+    }
+});
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -90,6 +105,94 @@ app.post('/login', function(req, res){
         console.log(err);
         console.error("Failed to login.");
         res.send(err);
+    });
+});
+
+app.get('/merchandise', function(req, res){
+    var basket = req.session.basket;
+    var item = req.param('item');
+    if (!item) {
+        res.render('merchandise.jade', {basket: basket, csrfToken: req.csrfToken()});
+    } else {
+        var data = merchPopulate.getAutocompleteData(item);
+        data.item = item;
+        res.render('merchandise.jade', {csrfToken: req.csrfToken(), data: data, basket: basket});
+    }
+
+});
+
+app.post('/merchandise/add', function(req, res){
+    var basket = req.session.basket;
+
+    if (!(basket)) {
+        req.session.basket = [];
+    }
+    delete req.body._csrf;
+    req.session.basket.push(req.body);
+    res.redirect('/merchandise');
+});
+
+app.post('/merchandise/remove/:item', function(req, res){
+    var itemIndex = req.params.item;
+    var basket = req.session.basket;
+
+    if (!(basket)) {
+        req.session.basket = [];
+        basket = req.session.basket;
+    }
+
+    if (basket.length -1 >= itemIndex) {
+        basket.splice(itemIndex, 1);
+    }
+
+    if (basket.length === 0) {
+        delete req.session.basket;
+    }
+
+    res.redirect('/merchandise');
+});
+
+app.post('/merchandise/order', function(req, res){
+    var basket = req.session.basket;
+
+    app.mailer.send('emails/base_email', {
+        to: process.env.dojo_printers_email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
+        cc: process.env.dojo_email,
+        email_sending_to: "printers",
+        order_from: req.body.email,
+        order_for: req.body.order_for,
+        subject: 'Dojo Merchandise Order Request', // REQUIRED.
+        basket: basket
+    }, function (err) {
+        if (err) {
+            console.log(err);
+            const message_header = "Uh oh :(";
+            const message = 'There was an error in placing your order! Please try again!';
+            res.render('message.jade', {message: message, message_header: message_header});
+            return;
+        }
+        delete req.session.basket;
+
+        app.mailer.send('emails/base_email', {
+            to: req.body.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
+            email_sending_to: "client",
+            order_for: req.body.order_for,
+            subject: 'Dojo Merchandise Order Sent', // REQUIRED.
+            basket: basket
+        }, function (err) {
+            if (err) {
+                console.log(err);
+                const message_header = "Could be worse?! :|";
+                const message = 'Your order request was sent but you may not receive confirmation of your order :/';
+                res.render('message.jade', {message: message, message_header: message_header});
+                return;
+            }
+            delete req.session.basket;
+            const message_header = "Order Request Sent :D";
+            const message = 'Your order request was sent  :D   ' +
+                'You should receive a confirmation e-mail shortly.\n';
+            res.render('message.jade', {message: message, message_header: message_header});
+        });
     });
 });
 

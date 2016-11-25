@@ -122,3 +122,76 @@ span.register-counter {
 .tom-nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
     color: #00b000;
     background-color: #373737; }
+
+.merchandise_demo_images {
+    text-align: center;
+}
+
+.merchandise_demo_images img{
+    max-width: 200px;
+    border-radius: 50%;
+    border: 5px solid #1AB31E;
+    margin: 20px
+}
+
+.merchandise_demo_images img:hover{
+    transition-duration: 1s;
+    transform: scale(1.5) rotate(3deg);
+}
+
+#merchForm {
+    padding-bottom: 15px;
+}
+
+.basket {
+    background-color: #303030;
+    border-radius: 20px;
+    padding: 10px 20px 20px 20px;
+    border: 5px solid #00b000;
+    margin: auto;
+    max-width: 450px;
+    margin-bottom: 30px;
+}
+
+.basket h3 {
+    text-align: center;
+    margin-top: 0;
+    text-decoration: underline;
+}
+
+.basket ul{
+    padding-bottom: 10px;
+}
+
+.basket ul li {
+    font-weight: bold;
+}
+
+.basket ul li span{
+    font-weight: normal;
+}
+
+form#place_order_form {
+    text-align: center;
+}
+
+.order_information h3 {
+    text-decoration: underline;
+    text-align: center;
+}
+
+#merchTitle {
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.merchandiseSpacing {
+    max-width: 450px;
+    padding: 0 30px 0 30px;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+.merchandiseSpacing h3{
+    margin-top: 0;
+}

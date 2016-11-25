@@ -1,0 +1,69 @@
+include includes/base.jade
+    script
+        include ../js/merchandise.js
+    h1#merchTitle Merchandise
+
+    div.col-md-4.basket
+        h3 Basket
+        if basket
+            each item, index in basket
+                h4 #{item.product}
+                ul
+                    li Name on product:&#32;
+                        span #{item.name}
+                    li Size:&#32;
+                        span #{item.size}
+                    li Colour:&#32;
+                        span #{item.colour}
+                    li Quantity:&#32;
+                        span #{item.quantity}
+                    li Other details/querues:&#32;
+                        span #{item.details}
+
+                    form(method="post" action="/merchandise/remove/" + index)
+                        .form-group
+                            input(type="hidden" name='_csrf' value=csrfToken)
+                            input(type="hidden" name='index' value=index)
+
+                        button.btn.btn-default Remove Item
+            p(align="center") - - - - - - - - - - - - - -
+
+            form#place_order_form(method="post" action="/merchandise/order/")
+                .form-group
+                    input(type="hidden" name='_csrf' value=csrfToken)
+                    label(for='client_email') Your E-mail:
+                    br
+                    input(name='email' type="email" required)#client_email
+                    br
+                    br
+                    label(for='order_for') Who are the products for:
+                    br
+                    input(name='order_for' required)#order_for
+                button.btn.btn-primary PLACE ORDER
+
+        else
+            p Nothing in the basket :(
+
+    div.col-md-4.merchandiseSpacing
+        include includes/merchandise/merchandiseForm
+
+    div.col-md-4.order_information.basket
+        h3 How does it work?
+        p Use this page to build your order. Once you have placed your order you will receive an invoice.
+        p Once the invoice has been paid production of your items will start.
+        br
+
+        h3 Delivery
+        p The products will be delivered to the Dojo unless you specify otherwise. You can collect them from the Horsham area.
+        br
+
+        h3 How long does it take?
+        p Once the invoice has been paid the products will be produced within 5 working days.
+        p If you need them for a set time, specify this in the details box of the item(s).
+        br
+
+    div.merchandise_demo_images.col-md-12
+        img(src="../assets/images/merchandise/hoodyFront.JPG")
+        img(src="../assets/images/merchandise/hoodyBack.JPG")
+        img(src="../assets/images/merchandise/tshirtGreyFront.jpg")
+        img(src="../assets/images/merchandise/tshirtGreyBack.jpg")
