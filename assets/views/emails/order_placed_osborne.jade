@@ -4,12 +4,16 @@ p Here is a list of the items that have been requested:
 each item in basket
     h4 #{item.product}
     ul
+        li Name on product:&#32;
+            span #{item.name}
         li Size:&#32;
             span #{item.size}
         li Colour:&#32;
             span #{item.colour}
         li Quantity:&#32;
             span #{item.quantity}
+        li Other details/querues:&#32;
+            span #{item.details}
 
 h2 Below is the e-mail that was sent to #{order_from}
 

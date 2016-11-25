@@ -10,13 +10,16 @@ include includes/base.jade
             each item, index in basket
                 h4 #{item.product}
                 ul
-
+                    li Name on product:&#32;
+                        span #{item.name}
                     li Size:&#32;
                         span #{item.size}
                     li Colour:&#32;
                         span #{item.colour}
                     li Quantity:&#32;
                         span #{item.quantity}
+                    li Other details/querues:&#32;
+                        span #{item.details}
 
                     form(method="post" action="/merchandise/remove/" + index)
                         .form-group

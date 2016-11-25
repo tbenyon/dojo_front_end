@@ -160,12 +160,15 @@ app.post('/merchandise/order', function(req, res){
         cc: process.env.dojo_email,
         email_sending_to: "printers",
         order_from: req.body.email,
+        order_for: req.body.order_for,
         subject: 'Dojo Merchandise Order Request', // REQUIRED.
         basket: basket
     }, function (err) {
         if (err) {
             console.log(err);
-            res.send('There was an error in placing your order! Please try again!');
+            const message_header = "Uh oh :(";
+            const message = 'There was an error in placing your order! Please try again!';
+            res.render('message.jade', {message: message, message_header: message_header});
             return;
         }
         delete req.session.basket;
@@ -174,16 +177,22 @@ app.post('/merchandise/order', function(req, res){
             to: req.body.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
             cc: process.env.dojo_email,
             email_sending_to: "client",
+            order_for: req.body.order_for,
             subject: 'Dojo Merchandise Order Sent', // REQUIRED.
             basket: basket
         }, function (err) {
             if (err) {
                 console.log(err);
-                res.send('Your order request was sent but you may not receive confirmation of your order');
+                const message_header = "Could be worse?! :|";
+                const message = 'Your order request was sent but you may not receive confirmation of your order :/';
+                res.render('message.jade', {message: message, message_header: message_header});
                 return;
             }
             delete req.session.basket;
-            res.send('Order Placed! :)');
+            const message_header = "Order Request Sent :D";
+            const message = 'Your order request was sent  :D   ' +
+                'You should receive a confirmation e-mail shortly.\n';
+            res.render('message.jade', {message: message, message_header: message_header});
         });
     });
 });
