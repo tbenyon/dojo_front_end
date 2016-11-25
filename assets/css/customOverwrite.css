@@ -165,3 +165,7 @@ span.register-counter {
 form#place_order_form {
     text-align: center;
 }
+
+.order_information h3 {
+    text-decoration: underline;
+}
