@@ -1,19 +1,7 @@
 include includes/base.jade
     script
         include ../js/merchandise.js
-    div.col-md-8
-        include includes/merchandise/merchandiseForm
-        div.order_information
-            h3 How does it work?
-            p Use this page to build your order. Once you have placed your order you will receive an invoice.
-            p Once the invoice has been paid production of your items will start
-
-            h3 Delivery
-            p The products will be delivered to the Dojo unless you specify otherwise. You can collect them from the Horsham area.
-
-            h3 How long does it take?
-            p Once the invoice has been paid the products will be produced within 5 working days.
-            p If you need them for a set time, specify this in the details box of the item(s).
+    h1#merchTitle Merchandise
 
     div.col-md-4.basket
         h3 Basket
@@ -55,6 +43,24 @@ include includes/base.jade
 
         else
             p Nothing in the basket :(
+
+    div.col-md-4.merchandiseSpacing
+        include includes/merchandise/merchandiseForm
+
+    div.col-md-4.order_information.basket
+        h3 How does it work?
+        p Use this page to build your order. Once you have placed your order you will receive an invoice.
+        p Once the invoice has been paid production of your items will start.
+        br
+
+        h3 Delivery
+        p The products will be delivered to the Dojo unless you specify otherwise. You can collect them from the Horsham area.
+        br
+
+        h3 How long does it take?
+        p Once the invoice has been paid the products will be produced within 5 working days.
+        p If you need them for a set time, specify this in the details box of the item(s).
+        br
 
     div.merchandise_demo_images.col-md-12
         img(src="../assets/images/merchandise/hoodyFront.JPG")

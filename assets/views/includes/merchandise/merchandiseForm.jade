@@ -7,7 +7,7 @@ form(method="post" action="/merchandise/add")#merchForm
       if data
         label(for='product') Product
       else
-          h3 Please choose a product using the dropdown menu:
+          h3 Please choose a product:
       select(onchange="getAutocompleteData(this.value)" id="product" name='product' class="form-control")
         option
           each product in products
