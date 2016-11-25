@@ -9,11 +9,25 @@ const crypto = require('crypto');
 const utf8 = require('utf8');
 const csrf = require('csurf');
 const merchPopulate = require('./merchandiseAutopopulate.js');
+var mailer = require('express-mailer');
 
 app.use(favicon(__dirname + '/assets/images/favicon.ico'));
 
-app.set('view engine', 'pug');
+app.set('view engine', 'jade');
 app.set('views', __dirname+'/assets/views');
+
+mailer.extend(app, {
+    from: 'horshamdojomentor@gmail.com',
+    host: 'smtp.gmail.com', // hostname
+    secureConnection: true, // use SSL
+    port: 465, // port for secure SMTP
+    transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
+    auth: {
+        user: process.env.dojo_email,
+        pass: process.env.dojo_email_password
+    }
+});
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -140,9 +154,21 @@ app.post('/merchandise/remove/:item', function(req, res){
 
 app.post('/merchandise/order', function(req, res){
     var basket = req.session.basket;
-    console.log('ORDER PLACED!!!\n', JSON.stringify(basket));
-    delete req.session.basket;
-    res.send(200);
+
+    app.mailer.send('emails/order_placed', {
+        to: 'tom.benyon@gmail.com', // REQUIRED. This can be a comma delimited string just like a normal email to field.
+        subject: 'Test Email' // REQUIRED.
+    }, function (err) {
+        if (err) {
+            // handle error
+            console.log(err);
+            res.send('There was an error sending the email');
+            return;
+        }
+        delete req.session.basket;
+        console.log('ORDER PLACED!!!\n', JSON.stringify(basket));
+        res.send('Email Sent');
+    });
 });
 
 app.get('/contact-us', function(req, res){
