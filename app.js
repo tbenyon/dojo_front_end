@@ -131,6 +131,10 @@ app.post('/merchandise/remove/:item', function(req, res){
         basket.splice(itemIndex, 1);
     }
 
+    if (basket.length === 0) {
+        delete req.session.basket;
+    }
+
     res.redirect('/merchandise');
 });
 
