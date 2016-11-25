@@ -156,7 +156,7 @@ app.post('/merchandise/order', function(req, res){
     var basket = req.session.basket;
 
     app.mailer.send('emails/base_email', {
-        to: "tom.benyon@gmail.com", // REQUIRED. This can be a comma delimited string just like a normal email to field.
+        to: process.env.dojo_printers_email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
         cc: process.env.dojo_email,
         email_sending_to: "printers",
         order_from: req.body.email,
@@ -183,7 +183,6 @@ app.post('/merchandise/order', function(req, res){
                 return;
             }
             delete req.session.basket;
-            console.log('ORDER PLACED!!!\n', JSON.stringify(basket));
             res.send('Order Placed! :)');
         });
     });
