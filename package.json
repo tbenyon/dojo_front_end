@@ -10,6 +10,7 @@
     "crypto": "0.0.3",
     "csurf": "^1.9.0",
     "express": "^4.14.0",
+    "express-mailer": "^0.3.1",
     "google-auth-library": "^0.9.8",
     "googleapis": "^12.4.0",
     "jade": "^1.11.0",
