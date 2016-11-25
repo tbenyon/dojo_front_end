@@ -5,7 +5,7 @@ include includes/base.jade
         include includes/merchandise/merchandiseForm
 
     div.col-md-4.basket
-        h3 Basket:
+        h3 Basket
         if basket
             each item, index in basket
                 h4 #{item.product}
@@ -24,10 +24,19 @@ include includes/base.jade
                             input(type="hidden" name='index' value=index)
 
                         button.btn.btn-default Remove Item
+            p(align="center") - - - - - - - - - - - - - -
 
             form#place_order_form(method="post" action="/merchandise/order/")
                 .form-group
                     input(type="hidden" name='_csrf' value=csrfToken)
+                    label(for='client_email') Your E-mail:
+                    br
+                    input(name='email' type="email" required)#client_email
+                    br
+                    br
+                    label(for='person_for') Who are the products for:
+                    br
+                    input(name='person_for' required)#person_for
                 button.btn.btn-primary PLACE ORDER
 
         else

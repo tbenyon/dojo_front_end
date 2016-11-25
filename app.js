@@ -155,19 +155,37 @@ app.post('/merchandise/remove/:item', function(req, res){
 app.post('/merchandise/order', function(req, res){
     var basket = req.session.basket;
 
-    app.mailer.send('emails/order_placed', {
-        to: 'tom.benyon@gmail.com', // REQUIRED. This can be a comma delimited string just like a normal email to field.
-        subject: 'Test Email' // REQUIRED.
+    app.mailer.send('emails/base_email', {
+        to: "tom.benyon@gmail.com", // REQUIRED. This can be a comma delimited string just like a normal email to field.
+        cc: process.env.dojo_email,
+        email_sending_to: "printers",
+        order_from: req.body.email,
+        subject: 'Dojo Merchandise Order Request', // REQUIRED.
+        basket: basket
     }, function (err) {
         if (err) {
-            // handle error
             console.log(err);
-            res.send('There was an error sending the email');
+            res.send('There was an error in placing your order! Please try again!');
             return;
         }
         delete req.session.basket;
-        console.log('ORDER PLACED!!!\n', JSON.stringify(basket));
-        res.send('Email Sent');
+
+        app.mailer.send('emails/base_email', {
+            to: req.body.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
+            cc: process.env.dojo_email,
+            email_sending_to: "client",
+            subject: 'Dojo Merchandise Order Sent', // REQUIRED.
+            basket: basket
+        }, function (err) {
+            if (err) {
+                console.log(err);
+                res.send('Your order request was sent but you may not receive confirmation of your order');
+                return;
+            }
+            delete req.session.basket;
+            console.log('ORDER PLACED!!!\n', JSON.stringify(basket));
+            res.send('Order Placed! :)');
+        });
     });
 });
 

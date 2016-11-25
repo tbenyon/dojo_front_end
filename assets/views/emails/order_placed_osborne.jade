@@ -1,0 +1,18 @@
+h1 New Coder Dojo Order In!!!
+p The order was from #{order_from}
+p Here is a list of the items that have been requested:
+each item in basket
+    h4 #{item.product}
+    ul
+        li Size:&#32;
+            span #{item.size}
+        li Colour:&#32;
+            span #{item.colour}
+        li Quantity:&#32;
+            span #{item.quantity}
+
+h2 Below is the e-mail that was sent to #{order_from}
+
+p - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+include order_placed_client

@@ -145,6 +145,10 @@ span.register-counter {
     padding: 5px 20px 20px 20px;
 }
 
+.basket h3 {
+    text-align: center;
+}
+
 .basket ul{
     padding-bottom: 10px;
 }
