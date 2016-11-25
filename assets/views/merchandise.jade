@@ -4,10 +4,21 @@ include includes/base.jade
     div.col-md-8
         include includes/merchandise/merchandiseForm
 
-    div.col-md-4
+    div.col-md-4.basket
         h3 Basket:
         if basket
-            p #{JSON.stringify(basket)}
+            each item, index in basket
+                h4 #{item.product}
+                ul
+
+                    li Size:&#32;
+                        span #{item.size}
+                    li Colour:&#32;
+                        span #{item.colour}
+                    li Quantity:&#32;
+                        span #{item.quantity}
+                    button.btn.btn-primary Remove
+
         else
             p Nothing in the basket :(
 

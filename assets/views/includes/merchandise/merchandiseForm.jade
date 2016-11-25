@@ -32,8 +32,8 @@ form(method="post" action="/merchandise/add")#merchForm
                     each colour in data.colours
                         option #{colour}
         .form-group
-          label(for='quantity' name='quantity') Quantity
-          select#quantity.form-control
+          label(for='quantity') Quantity
+          select(name='quantity')#quantity.form-control
             option 1
             option 2
             option 3

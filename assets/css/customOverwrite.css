@@ -138,3 +138,20 @@ span.register-counter {
     transition-duration: 1s;
     transform: scale(1.2) rotate(5deg);
 }
+
+.basket {
+    background-color: #FFF;
+    border-radius: 20px;
+}
+
+.basket ul{
+    padding-bottom: 10px;
+}
+
+.basket ul li {
+    font-weight: bold;
+}
+
+.basket ul li span{
+    font-weight: normal;
+}
