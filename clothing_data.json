@@ -1,6 +1,6 @@
 [
   {
-    "name": "Adult Hoody (£12+VAT)",
+    "name": "Adult Hoody (£14.40)",
     "price": 14.4,
     "sizes": ["S", "M", "L", "XL", "XXL"],
     "colours": ["Black with green text", "Grey with white text", "Hot Pink with white text"],
@@ -16,7 +16,7 @@
   },
 
   {
-    "name": "Adult T-Shirt (£6.95+VAT)",
+    "name": "Adult T-Shirt (£8.34)",
     "price": 8.34,
     "sizes": ["S", "M", "L", "XL", "XXL"],
     "colours": ["Black with green text", "Grey with green text", "Hot Pink with white text"],
