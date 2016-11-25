@@ -19,6 +19,8 @@ form(method="post" action="/merchandise/add")#merchForm
 
         .form-group
           label(for='size') Size
+            a(href="#{data.link}") &#32; (Click here for size details)
+
           select(name='size' )#size.form-control
             if data
                 each size in data.sizes
