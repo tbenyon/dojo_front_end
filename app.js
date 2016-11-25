@@ -175,7 +175,6 @@ app.post('/merchandise/order', function(req, res){
 
         app.mailer.send('emails/base_email', {
             to: req.body.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-            cc: process.env.dojo_email,
             email_sending_to: "client",
             order_for: req.body.order_for,
             subject: 'Dojo Merchandise Order Sent', // REQUIRED.
