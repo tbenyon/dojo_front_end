@@ -142,6 +142,7 @@ span.register-counter {
 .basket {
     background-color: #FFF;
     border-radius: 20px;
+    padding: 5px 20px 20px 20px;
 }
 
 .basket ul{
@@ -154,4 +155,8 @@ span.register-counter {
 
 .basket ul li span{
     font-weight: normal;
+}
+
+form#place_order_form {
+    text-align: center;
 }

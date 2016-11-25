@@ -138,6 +138,13 @@ app.post('/merchandise/remove/:item', function(req, res){
     res.redirect('/merchandise');
 });
 
+app.post('/merchandise/order', function(req, res){
+    var basket = req.session.basket;
+    console.log('ORDER PLACED!!!\n', JSON.stringify(basket));
+    delete req.session.basket;
+    res.send(200);
+});
+
 app.get('/contact-us', function(req, res){
     res.render('contact_us.jade');
 });

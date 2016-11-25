@@ -22,11 +22,17 @@ include includes/base.jade
                         .form-group
                             input(type="hidden" name='_csrf' value=csrfToken)
                             input(type="hidden" name='index' value=index)
-                        button.btn.btn-primary Remove Item
+
+                        button.btn.btn-default Remove Item
+
+            form#place_order_form(method="post" action="/merchandise/order/")
+                .form-group
+                    input(type="hidden" name='_csrf' value=csrfToken)
+                button.btn.btn-primary PLACE ORDER
 
         else
             p Nothing in the basket :(
 
-    div.merchandise_demo_images
+    div.merchandise_demo_images.col-md-12
         img(src="../assets/images/merchandise/hoodyFront.JPG")
         img(src="../assets/images/merchandise/hoodyBack.JPG")
