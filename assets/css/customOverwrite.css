@@ -128,7 +128,7 @@ span.register-counter {
 }
 
 .merchandise_demo_images img{
-    max-width: 250px;
+    max-width: 200px;
     border-radius: 50%;
     border: 5px solid #1AB31E;
     margin: 20px
@@ -136,7 +136,7 @@ span.register-counter {
 
 .merchandise_demo_images img:hover{
     transition-duration: 1s;
-    transform: scale(1.2) rotate(5deg);
+    transform: scale(1.5) rotate(3deg);
 }
 
 #merchForm {
