@@ -116,7 +116,23 @@ app.post('/merchandise/add', function(req, res){
     }
     delete req.body._csrf;
     req.session.basket.push(req.body);
-    res.render('merchandise.jade', {csrfToken: req.csrfToken(), basket: basket});
+    res.redirect('/merchandise');
+});
+
+app.post('/merchandise/remove/:item', function(req, res){
+    var itemIndex = req.params.item;
+    var basket = req.session.basket;
+
+    if (!(basket)) {
+        req.session.basket = [];
+        basket = req.session.basket;
+    }
+
+    if (basket.length -1 >= itemIndex) {
+        basket.splice(itemIndex, 1);
+    }
+
+    res.redirect('/merchandise');
 });
 
 app.get('/contact-us', function(req, res){

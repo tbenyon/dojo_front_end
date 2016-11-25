@@ -17,7 +17,12 @@ include includes/base.jade
                         span #{item.colour}
                     li Quantity:&#32;
                         span #{item.quantity}
-                    button.btn.btn-primary Remove
+
+                    form(method="post" action="/merchandise/remove/" + index)
+                        .form-group
+                            input(type="hidden" name='_csrf' value=csrfToken)
+                            input(type="hidden" name='index' value=index)
+                        button.btn.btn-primary Remove Item
 
         else
             p Nothing in the basket :(
