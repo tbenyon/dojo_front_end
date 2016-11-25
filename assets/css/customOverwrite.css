@@ -139,6 +139,10 @@ span.register-counter {
     transform: scale(1.2) rotate(5deg);
 }
 
+#merchForm {
+    padding-bottom: 15px;
+}
+
 .basket {
     background-color: #303030;
     border-radius: 20px;

@@ -4,7 +4,10 @@ form(method="post" action="/merchandise/add")#merchForm
     input(type="hidden" name='_csrf' value=csrfToken)
 
     .form-group
-      label(for='product') Product
+      if data
+        label(for='product') Product
+      else
+          h3 Please choose a product using the dropdown menu:
       select(onchange="getAutocompleteData(this.value)" id="product" name='product' class="form-control")
         option
           each product in products
