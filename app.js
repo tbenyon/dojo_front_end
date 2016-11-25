@@ -98,7 +98,7 @@ app.get('/merchandise', function(req, res){
     var basket = req.session.basket;
     var item = req.param('item');
     if (!item) {
-        res.render('merchandise.jade', {basket: basket});
+        res.render('merchandise.jade', {basket: basket, csrfToken: req.csrfToken()});
     } else {
         var data = merchPopulate.getAutocompleteData(item);
         data.item = item;
@@ -112,7 +112,6 @@ app.post('/merchandise/add', function(req, res){
 
     if (!(basket)) {
         req.session.basket = [];
-        basket = req.session.basket;
     }
     delete req.body._csrf;
     req.session.basket.push(req.body);
