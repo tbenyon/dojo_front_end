@@ -6,7 +6,9 @@ include includes/base.jade
     div.col-md-4.basket
         h3 Basket
         if basket
+            - var total = 0;
             each item, index in basket
+                - total += parseFloat(item.price.substring(1));
                 h4 #{item.product}
                 ul
                     li Name on product:&#32;
@@ -27,7 +29,8 @@ include includes/base.jade
 
                         button.btn.btn-default Remove Item
             p(align="center") - - - - - - - - - - - - - -
-
+            h3 Total: £#{total.toFixed(2)}
+            br
             form#place_order_form(method="post" action="/merchandise/order/")
                 .form-group
                     input(type="hidden" name='_csrf' value=csrfToken)
