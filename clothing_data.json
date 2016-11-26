@@ -3,7 +3,7 @@
     "name": "Adult Hoody",
     "price": 14.4,
     "sizes": ["S", "M", "L", "XL", "XXL"],
-    "colours": ["Black with green text", "Grey with white text", "Hot Pink with white text"],
+    "colours": ["Black with green text", "Grey with white text", "Hot Pink with white text", "White with green text."],
     "link": "http://www.our-catalogue.com/email.php?p=JH050&ref=OSUN"
   },
 
@@ -11,7 +11,7 @@
     "name": "Child Hoody",
     "price": 12,
     "sizes": ["XS", "M", "L", "XL"],
-    "colours": ["Black with green text", "Grey with white text", "Hot Pink with white text"],
+    "colours": ["Black with green text", "Grey with white text", "Hot Pink with white text", "White with green text."],
     "link": "http://www.our-catalogue.com/email.php?p=JH050B&ref=OSUN"
   },
 
@@ -19,7 +19,7 @@
     "name": "Adult T-Shirt",
     "price": 8.34,
     "sizes": ["S", "M", "L", "XL", "XXL"],
-    "colours": ["Black with green text", "Grey with green text", "Hot Pink with white text"],
+    "colours": ["Black with green text", "Grey with green text", "Hot Pink with white text", "White with green text."],
     "link": "http://www.our-catalogue.com/email.php?p=SS6&ref=OSUN"
   },
 
@@ -27,7 +27,7 @@
     "name": "Child T-Shirt",
     "price": 6.95,
     "sizes": ["Age 5-6", "Age 7-8", "Age 9-11", "Age 12-13", "Age 14-15"],
-    "colours": ["Black with green text", "Grey with white text", "Hot Pink with white text"],
+    "colours": ["Black with green text", "Grey with white text", "Hot Pink with white text", "White with green text."],
     "link": "http://www.our-catalogue.com/email.php?p=SS6B&ref=OSUN"
   }
 ]
