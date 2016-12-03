@@ -29,7 +29,7 @@ function moveSnow(){
             }
         }
     }
-    animate = setTimeout(moveSnow,20); // call moveRight in 20msec
+    animate = setTimeout(moveSnow,40); // call moveRight in 20msec
 }
 
 function getSpeed(i) {
