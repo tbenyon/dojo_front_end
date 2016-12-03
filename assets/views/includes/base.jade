@@ -19,7 +19,8 @@ html
 
     body
         div.container
-            img(class="snowflake" id="snowflake" src="/assets/images/snowFlake.png")
+            - var n = 1;
+            img(class="snowflake" id="snowflake#{n}" src="/assets/images/snowFlake.png")
             include header.html
 
             include navbar.html

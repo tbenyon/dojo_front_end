@@ -1,5 +1,5 @@
-#snowflake {
-    position: absolute;
+.snowflake {
+    position: fixed;
     left: 20px;
     top: -20px;
     width: 20px;

@@ -2,17 +2,19 @@ var imgObj = null;
 var animate ;
 
 function init(){
-    imgObj = document.getElementById('snowflake');
+    imgObj = document.getElementById('snowflake1');
     imgObj.style.top = '-20px';
-    moveRight();
+    imgObj.style.left = Math.floor((Math.random() * window.innerWidth) + 1) + 'px';
+    moveSnow();
 }
 
-function moveRight(){
+function moveSnow(){
     imgObj.style.top = parseInt(imgObj.style.top) + 10 + 'px';
     if (parseInt(imgObj.style.top) > Math.max(document.documentElement.clientHeight, window.innerHeight || 0)) {
         imgObj.style.top = '-20px';
+        imgObj.style.left = Math.floor((Math.random() * window.innerWidth) + 1) + 'px';
     }
-    animate = setTimeout(moveRight,20); // call moveRight in 20msec
+    animate = setTimeout(moveSnow,20); // call moveRight in 20msec
 }
 
 function stop(){
