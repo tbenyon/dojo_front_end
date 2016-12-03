@@ -20,6 +20,7 @@ function moveSnow(){
         if (parseInt(imageObjects[i].style.top) > Math.max(document.documentElement.clientHeight, window.innerHeight || 0)) {
             imageObjects[i].style.top = '-20px';
             imageObjects[i].style.left = Math.floor((Math.random() * window.innerWidth) + 1) + 'px';
+            imageObjects[i].style['z-index'] = Math.floor((Math.random() * 4) + -2);
         }
     }
     animate = setTimeout(moveSnow,20); // call moveRight in 20msec
