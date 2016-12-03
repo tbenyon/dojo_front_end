@@ -19,8 +19,15 @@ html
 
     body
         - var n = 0;
-        while n <= 30
-            img(class="snowflake" id="snowflake#{n++}" src="/assets/images/snowFlake.png")
+        - var numOfSnowBalls = 100;
+        while n <= numOfSnowBalls
+            if n < numOfSnowBalls / 3
+                img(class="snowflake" id="snowflake#{n++}" src="/assets/images/snowFlake.png")
+            if n < numOfSnowBalls / 3 * 2
+                img(class="snowflake snowflakeMedium" id="snowflake#{n++}" src="/assets/images/snowFlake.png")
+            else
+                img(class="snowflake snowflakeSmall" id="snowflake#{n++}" src="/assets/images/snowFlake.png")
+
 
         div.container
 

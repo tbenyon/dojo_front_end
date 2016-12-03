@@ -1,8 +1,17 @@
 .snowflake {
     position: fixed;
-    z-index: 5;
+    z-index: -5;
     left: 20px;
     top: -20px;
     width: 20px;
     height: 20px;
+}
+.snowflakeMedium {
+    width: 12px;
+    height: 12px;
+}
+
+.snowflakeSmall {
+    width: 5px;
+    height: 5px;
 }
