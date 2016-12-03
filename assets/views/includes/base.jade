@@ -18,9 +18,13 @@ html
 
 
     body
+        - var n = 0;
+        while n <= 5
+            img(class="snowflake" id="snowflake#{n++}" src="/assets/images/snowFlake.png")
+
         div.container
-            - var n = 1;
-            img(class="snowflake" id="snowflake#{n}" src="/assets/images/snowFlake.png")
+
+
             include header.html
 
             include navbar.html
