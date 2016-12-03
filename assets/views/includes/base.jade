@@ -8,16 +8,18 @@ html
             include ../../bower_components/bootstrap/dist/css/bootstrap-theme.css
             include ../../css/lavish-bootstrap.css
             include ../../css/customOverwrite.css
+            include ../../css/snow.css
         script
             include ../../bower_components/jquery/dist/jquery.js
             include ../../bower_components/bootstrap/dist/js/bootstrap.js
             include ../../js/navBar.js
             include ../../js/js.cookie.js
+            include ../../js/snow.js
 
 
     body
         div.container
-
+            img(class="snowflake" id="snowflake" src="/assets/images/snowFlake.png")
             include header.html
 
             include navbar.html
