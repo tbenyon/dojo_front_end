@@ -57,7 +57,6 @@ function getSnowCreationLocation() {
     } else {
         snow_creation_location = Math.floor((Math.random() * (   snow_creation_width   )) + 1) - snow_creation_padding;
     }
-    console.log(snow_creation_location);
     return snow_creation_location;
 }
 
