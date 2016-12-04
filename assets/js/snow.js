@@ -5,6 +5,7 @@ var imageObjects = [];
 var snowSpeed = 3;
 var wind = 1;
 var increase;
+var shuffle;
 
 var snow_creation_padding;
 var snow_creation_width;
@@ -25,7 +26,8 @@ function moveSnow(){
     for (var i = 0; i < number_of_snowballs; i++) {
         increase = getSpeed(i);
         imageObjects[i].style.top = parseInt(imageObjects[i].style.top) + increase + 'px';
-        imageObjects[i].style.left = parseInt(imageObjects[i].style.left) + wind + 'px';
+        shuffle = Math.floor(Math.random() * 2) -2;
+        imageObjects[i].style.left = parseInt(imageObjects[i].style.left) + wind + shuffle + 'px';
         if (parseInt(imageObjects[i].style.top) > Math.max(document.documentElement.clientHeight, window.innerHeight || 0)) {
             imageObjects[i].style.top = '-20px';
             imageObjects[i].style.left =  getSnowCreationLocation() + 'px';
@@ -46,7 +48,6 @@ function getSpeed(i) {
     } else {
         return snowSpeed / 3
     }
-
 }
 
 function getSnowCreationLocation() {
