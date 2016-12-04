@@ -17,7 +17,7 @@ var TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs-quickstart.json';
  * @param {function} callback The callback to call with the authorized client.
  */
 exports.authorise = function() {
-    return new Promise(function (resolve) {
+    return new Promise(function (resolve, reject) {
         if (!(process.env.dojo_google_client_secret && process.env.dojo_google_client_id && process.env.dojo_google_redirect_uris)) {
             reject(new Error("Missing Google environment variable."))
         }
