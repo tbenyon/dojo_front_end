@@ -54,9 +54,9 @@ function getSnowCreationLocation() {
     snow_creation_padding = (window.innerHeight / snowSpeed) * Math.abs(wind);
     snow_creation_width = window.innerWidth + snow_creation_padding;
     if (wind < 0) {
-        snow_creation_location = Math.floor((Math.random() * (   snow_creation_width   )) + 1);
-    } else {
         snow_creation_location = Math.floor((Math.random() * (   snow_creation_width   )) + 1) - snow_creation_padding;
+    } else {
+        snow_creation_location = Math.floor((Math.random() * (   snow_creation_width   )) + 1);
     }
     return snow_creation_location;
 }
