@@ -8,15 +8,21 @@ html
             include ../../bower_components/bootstrap/dist/css/bootstrap-theme.css
             include ../../css/lavish-bootstrap.css
             include ../../css/customOverwrite.css
+            include ../../css/snow.css
         script
             include ../../bower_components/jquery/dist/jquery.js
             include ../../bower_components/bootstrap/dist/js/bootstrap.js
             include ../../js/navBar.js
             include ../../js/js.cookie.js
+            include ../../js/snow.js
 
 
     body
+        if new Date().getMonth() == "11"
+            include snow.jade
+
         div.container
+
 
             include header.html
 
