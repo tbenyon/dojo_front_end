@@ -14,9 +14,13 @@ var snow_creation_location;
 function init(){
     for (var i = 0; i < number_of_snowballs; i++) {
         imgObj = document.getElementById('snowflake' + i);
-        imgObj.style.top = Math.floor((Math.random() * window.innerHeight) + 1) + 'px';
-        imgObj.style.left = Math.floor((Math.random() * window.innerWidth) + 1) + 'px';
-        imageObjects.push(imgObj);
+        if (typeof imgObj !== "undefined" && imgObj !== null) {
+            imgObj.style.top = Math.floor((Math.random() * window.innerHeight) + 1) + 'px';
+            imgObj.style.left = Math.floor((Math.random() * window.innerWidth) + 1) + 'px';
+            imageObjects.push(imgObj);
+        } else {
+            return;
+        }
     }
     moveSnow();
 
