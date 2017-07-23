@@ -108,6 +108,10 @@ app.post('/login', function(req, res){
     });
 });
 
+app.get('/subscribe', function(req, res){
+    res.render('subscribe.jade');
+});
+
 app.get('/merchandise', function(req, res){
     var basket = req.session.basket;
     var item = req.param('item');
