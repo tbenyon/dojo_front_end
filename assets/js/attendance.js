@@ -99,8 +99,6 @@ attendanceTopScoresData.forEach(function (user) {
    }
 });
 
-console.log(studentCount);
-
 var ctx2 = document.getElementById("memberCounter").getContext("2d");
 
 var attendanceTopScores = new Chart(ctx2, {
